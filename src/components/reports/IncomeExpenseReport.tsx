@@ -70,16 +70,16 @@ export default function IncomeExpenseReport({ transactions }: IncomeExpenseRepor
   );
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">Reporte de Ingresos vs Gastos</h3>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Reporte de Ingresos vs Gastos</h3>
         <div className="flex items-center gap-2">
-          <Calendar className="w-5 h-5 text-gray-400" />
+          <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
           <select
             value={selectedYear}
             onChange={(e) => setSelectedYear(Number(e.target.value))}
-            className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="px-2 sm:px-3 py-1.5 sm:py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             {availableYears.map(year => (
               <option key={year} value={year}>{year}</option>
@@ -89,33 +89,33 @@ export default function IncomeExpenseReport({ transactions }: IncomeExpenseRepor
       </div>
 
       {/* Yearly Summary */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div className="bg-green-50 rounded-lg p-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
+        <div className="bg-green-50 rounded-lg p-3 sm:p-4">
           <div className="flex items-center gap-2 mb-2">
-            <TrendingUp className="w-5 h-5 text-green-600" />
-            <span className="text-sm font-medium text-green-900">Ingresos Totales</span>
+            <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+            <span className="text-xs sm:text-sm font-medium text-green-900">Ingresos Totales</span>
           </div>
-          <p className="text-2xl font-bold text-green-600">Q{yearlyTotals.income.toFixed(2)}</p>
+          <p className="text-xl sm:text-2xl font-bold text-green-600">Q{yearlyTotals.income.toFixed(2)}</p>
           <p className="text-xs text-green-700 mt-1">Promedio: Q{yearlyTotals.avgIncome.toFixed(2)}/mes</p>
         </div>
 
-        <div className="bg-red-50 rounded-lg p-4">
+        <div className="bg-red-50 rounded-lg p-3 sm:p-4">
           <div className="flex items-center gap-2 mb-2">
-            <TrendingDown className="w-5 h-5 text-red-600" />
-            <span className="text-sm font-medium text-red-900">Gastos Totales</span>
+            <TrendingDown className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
+            <span className="text-xs sm:text-sm font-medium text-red-900">Gastos Totales</span>
           </div>
-          <p className="text-2xl font-bold text-red-600">Q{yearlyTotals.expense.toFixed(2)}</p>
+          <p className="text-xl sm:text-2xl font-bold text-red-600">Q{yearlyTotals.expense.toFixed(2)}</p>
           <p className="text-xs text-red-700 mt-1">Promedio: Q{yearlyTotals.avgExpense.toFixed(2)}/mes</p>
         </div>
 
-        <div className={`rounded-lg p-4 ${yearlyTotals.balance >= 0 ? 'bg-blue-50' : 'bg-orange-50'}`}>
+        <div className={`rounded-lg p-3 sm:p-4 ${yearlyTotals.balance >= 0 ? 'bg-blue-50' : 'bg-orange-50'}`}>
           <div className="flex items-center gap-2 mb-2">
-            <TrendingUp className={`w-5 h-5 ${yearlyTotals.balance >= 0 ? 'text-blue-600' : 'text-orange-600'}`} />
-            <span className={`text-sm font-medium ${yearlyTotals.balance >= 0 ? 'text-blue-900' : 'text-orange-900'}`}>
+            <TrendingUp className={`w-4 h-4 sm:w-5 sm:h-5 ${yearlyTotals.balance >= 0 ? 'text-blue-600' : 'text-orange-600'}`} />
+            <span className={`text-xs sm:text-sm font-medium ${yearlyTotals.balance >= 0 ? 'text-blue-900' : 'text-orange-900'}`}>
               Balance Anual
             </span>
           </div>
-          <p className={`text-2xl font-bold ${yearlyTotals.balance >= 0 ? 'text-blue-600' : 'text-orange-600'}`}>
+          <p className={`text-xl sm:text-2xl font-bold ${yearlyTotals.balance >= 0 ? 'text-blue-600' : 'text-orange-600'}`}>
             Q{yearlyTotals.balance.toFixed(2)}
           </p>
           <p className={`text-xs mt-1 ${yearlyTotals.balance >= 0 ? 'text-blue-700' : 'text-orange-700'}`}>
@@ -170,18 +170,18 @@ export default function IncomeExpenseReport({ transactions }: IncomeExpenseRepor
       </div>
 
       {/* Legend */}
-      <div className="flex items-center justify-center gap-6 mt-6 pt-4 border-t">
-        <div className="flex items-center gap-2">
+      <div className="flex items-center justify-center gap-3 sm:gap-6 mt-4 sm:mt-6 pt-4 border-t">
+        <div className="flex items-center gap-1 sm:gap-2">
           <div className="w-3 h-3 bg-green-500 rounded-full" />
-          <span className="text-sm text-gray-600">Ingresos</span>
+          <span className="text-xs sm:text-sm text-gray-600">Ingresos</span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
           <div className="w-3 h-3 bg-red-500 rounded-full" />
-          <span className="text-sm text-gray-600">Gastos</span>
+          <span className="text-xs sm:text-sm text-gray-600">Gastos</span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
           <div className="w-3 h-3 bg-blue-600 rounded-full" />
-          <span className="text-sm text-gray-600">Balance</span>
+          <span className="text-xs sm:text-sm text-gray-600">Balance</span>
         </div>
       </div>
     </div>

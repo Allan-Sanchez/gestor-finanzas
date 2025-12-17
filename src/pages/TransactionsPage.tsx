@@ -5,13 +5,16 @@ import { useAuth } from '../hooks/useAuth';
 import { useTransactions, useCreateTransaction, useUpdateTransaction, useDeleteTransaction } from '../hooks/useTransactions';
 import { useAccounts } from '../hooks/useAccounts';
 import { useCategories } from '../hooks/useCategories';
+import { useIsMobile } from '../hooks/useIsMobile';
 import TransactionRow from '../components/transactions/TransactionRow';
 import TransactionForm from '../components/transactions/TransactionForm';
 import TransactionFilters from '../components/transactions/TransactionFilters';
+import MobileTransactionList from '../components/transactions/MobileTransactionList';
 import type { TransactionWithRelations, TransactionInsert, TransactionUpdate, TransactionFilters as TFilters } from '../types';
 
 export default function TransactionsPage() {
   const { user } = useAuth();
+  const isMobile = useIsMobile();
   const [filters, setFilters] = useState<TFilters>({});
   const { data: transactions, isLoading } = useTransactions(user?.id, filters);
   const { data: accounts = [] } = useAccounts(user?.id);
@@ -76,9 +79,9 @@ export default function TransactionsPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-start">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Transacciones</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Transacciones</h1>
           <p className="text-gray-600 mt-1">Gestiona tus ingresos y gastos</p>
         </div>
         <Button onClick={handleNewTransaction} disabled={accounts.length === 0}>
@@ -125,7 +128,7 @@ export default function TransactionsPage() {
         categories={categories}
       />
 
-      {/* Transactions Table */}
+      {/* Transactions List/Table */}
       {accounts.length === 0 ? (
         <Card>
           <CardContent className="text-center py-12">
@@ -139,46 +142,54 @@ export default function TransactionsPage() {
           </CardContent>
         </Card>
       ) : transactions && transactions.length > 0 ? (
-        <Card>
-          <CardContent className="p-0">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gray-50 border-b border-gray-200">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Fecha
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Descripción
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Cuenta
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Monto
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Estado
-                    </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Acciones
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {transactions.map((transaction) => (
-                    <TransactionRow
-                      key={transaction.id}
-                      transaction={transaction}
-                      onEdit={handleEditTransaction}
-                      onDelete={handleDeleteTransaction}
-                    />
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </CardContent>
-        </Card>
+        isMobile ? (
+          <MobileTransactionList
+            transactions={transactions}
+            onEdit={handleEditTransaction}
+            onDelete={handleDeleteTransaction}
+          />
+        ) : (
+          <Card>
+            <CardContent className="p-0">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50 border-b border-gray-200">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Fecha
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Descripción
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Cuenta
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Monto
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Estado
+                      </th>
+                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Acciones
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {transactions.map((transaction) => (
+                      <TransactionRow
+                        key={transaction.id}
+                        transaction={transaction}
+                        onEdit={handleEditTransaction}
+                        onDelete={handleDeleteTransaction}
+                      />
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
+        )
       ) : (
         <Card>
           <CardContent className="text-center py-12">

@@ -100,7 +100,7 @@ export default function TransactionRow({ transaction, onEdit, onDelete }: Transa
               className="fixed inset-0 z-10"
               onClick={() => setShowMenu(false)}
             />
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-20">
+            <div className="absolute right-0 mt-2 w-48 max-w-[calc(100vw-2rem)] bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-20">
               <button
                 onClick={() => {
                   onEdit(transaction);

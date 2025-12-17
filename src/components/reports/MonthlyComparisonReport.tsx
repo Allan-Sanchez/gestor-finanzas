@@ -92,16 +92,16 @@ export default function MonthlyComparisonReport({ transactions }: MonthlyCompari
   );
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">Comparativa Mensual (Últimos 12 Meses)</h3>
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Comparativa Mensual (Últimos 12 Meses)</h3>
         <Calendar className="w-5 h-5 text-gray-400" />
       </div>
 
       {/* Statistics Summary */}
       {stats && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6">
           {/* Average Income */}
           <div className="bg-green-50 rounded-lg p-4">
             <div className="flex items-center justify-between mb-2">

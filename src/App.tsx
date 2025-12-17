@@ -8,6 +8,7 @@ import AccountsPage from './pages/AccountsPage';
 import BudgetsPage from './pages/BudgetsPage';
 import ReportsPage from './pages/ReportsPage';
 import SettingsPage from './pages/SettingsPage';
+import MorePage from './pages/MorePage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import MainLayout from './components/layout/MainLayout';
 
@@ -102,6 +103,17 @@ function App() {
               <ProtectedRoute>
                 <MainLayout>
                   <SettingsPage />
+                </MainLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/more"
+            element={
+              <ProtectedRoute>
+                <MainLayout>
+                  <MorePage />
                 </MainLayout>
               </ProtectedRoute>
             }

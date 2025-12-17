@@ -46,10 +46,10 @@ export default function Modal({
   if (!isOpen) return null;
 
   const sizes = {
-    sm: 'max-w-md',
-    md: 'max-w-lg',
-    lg: 'max-w-2xl',
-    xl: 'max-w-4xl',
+    sm: 'max-w-full sm:max-w-md',
+    md: 'max-w-full sm:max-w-lg',
+    lg: 'max-w-full sm:max-w-2xl',
+    xl: 'max-w-full sm:max-w-4xl',
   };
 
   return (
@@ -70,8 +70,8 @@ export default function Modal({
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-200">
-            <h2 className="text-xl font-semibold text-gray-900">{title}</h2>
+          <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">{title}</h2>
             {showCloseButton && (
               <button
                 onClick={onClose}
@@ -83,7 +83,7 @@ export default function Modal({
           </div>
 
           {/* Content */}
-          <div className="p-6">{children}</div>
+          <div className="p-4 sm:p-6">{children}</div>
         </div>
       </div>
     </div>

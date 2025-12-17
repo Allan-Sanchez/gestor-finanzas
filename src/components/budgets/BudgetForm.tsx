@@ -87,10 +87,10 @@ export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: Bud
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg shadow-xl max-w-md w-full">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-full sm:max-w-md">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-xl font-semibold">
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b">
+          <h2 className="text-lg sm:text-xl font-semibold">
             {budget ? 'Editar Presupuesto' : 'Nuevo Presupuesto'}
           </h2>
           <button
@@ -103,7 +103,7 @@ export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: Bud
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4">
           {/* Category */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">

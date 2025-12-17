@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import type { Database } from '../../types/database.types';
+import { useIsMobile } from '../../hooks/useIsMobile';
 
 type Transaction = Database['public']['Tables']['transactions']['Row'] & {
   categories: {
@@ -23,9 +24,11 @@ interface CategoryData {
 }
 
 export default function CategorySpending({ transactions }: CategorySpendingProps) {
+  const isMobile = useIsMobile();
   const currentMonth = new Date().toISOString().slice(0, 7);
 
   const categoryData = useMemo(() => {
+    const limit = isMobile ? 5 : 8;
     // Filter current month expenses with categories
     const monthExpenses = transactions.filter(t =>
       t.date.startsWith(currentMonth) &&
@@ -60,32 +63,32 @@ export default function CategorySpending({ transactions }: CategorySpendingProps
         percentage: total > 0 ? (cat.amount / total) * 100 : 0
       }))
       .sort((a, b) => b.amount - a.amount)
-      .slice(0, 8); // Top 8 categories
+      .slice(0, limit); // Top categories
 
-    return { data, total };
-  }, [transactions, currentMonth]);
+    return { data, total, limit };
+  }, [transactions, currentMonth, isMobile]);
 
   if (categoryData.data.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-6">Gastos por Categoría</h3>
-        <div className="text-center py-12 text-gray-500">
-          <p>No hay gastos registrados este mes</p>
+      <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">Gastos por Categoría</h3>
+        <div className="text-center py-8 sm:py-12 text-gray-500">
+          <p className="text-sm">No hay gastos registrados este mes</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">Gastos por Categoría</h3>
-        <span className="text-sm text-gray-500">
+    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+      <div className="flex items-center justify-between mb-4 sm:mb-6">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Gastos por Categoría</h3>
+        <span className="text-xs sm:text-sm text-gray-500">
           Total: Q{categoryData.total.toFixed(2)}
         </span>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {categoryData.data.map((category) => (
           <div key={category.id}>
             <div className="flex items-center justify-between mb-2">
@@ -123,9 +126,9 @@ export default function CategorySpending({ transactions }: CategorySpendingProps
       </div>
 
       {/* Show if there are more categories */}
-      {categoryData.data.length >= 8 && (
+      {categoryData.data.length >= categoryData.limit && (
         <p className="text-xs text-gray-500 text-center mt-4">
-          Mostrando las 8 categorías principales
+          Mostrando las {categoryData.limit} categorías principales
         </p>
       )}
     </div>

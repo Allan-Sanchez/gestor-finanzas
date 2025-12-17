@@ -81,16 +81,16 @@ export default function DataManagement() {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <div className="flex items-center gap-2 mb-6">
-        <Database className="w-5 h-5 text-gray-700" />
-        <h3 className="text-lg font-semibold text-gray-900">Gestión de Datos</h3>
+    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+      <div className="flex items-center gap-2 mb-4 sm:mb-6">
+        <Database className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Gestión de Datos</h3>
       </div>
 
       {/* Data Statistics */}
-      <div className="bg-gray-50 rounded-lg p-4 mb-6">
+      <div className="bg-gray-50 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
         <h4 className="text-sm font-medium text-gray-700 mb-3">Resumen de Datos</h4>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
           <div className="text-center">
             <p className="text-2xl font-bold text-blue-600">{stats.transactions}</p>
             <p className="text-xs text-gray-600">Transacciones</p>
@@ -110,7 +110,7 @@ export default function DataManagement() {
         </div>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {/* Export Data */}
         <div className="border rounded-lg p-4">
           <div className="flex items-start justify-between">
@@ -199,7 +199,7 @@ export default function DataManagement() {
               <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
                 <AlertTriangle className="w-6 h-6 text-red-600" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900">¿Estás completamente seguro?</h3>
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900">¿Estás completamente seguro?</h3>
             </div>
             <p className="text-gray-600 mb-2">
               Esta acción eliminará <strong className="text-red-600">{stats.total} registros</strong> de forma permanente:

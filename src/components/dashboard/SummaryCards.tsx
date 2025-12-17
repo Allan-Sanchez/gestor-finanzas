@@ -21,16 +21,16 @@ export default function SummaryCards({
   const isOverBudget = budgetPercentage > 100;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
       {/* Total Income */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="bg-white rounded-lg shadow p-4 sm:p-6">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-gray-600">Ingresos del Mes</span>
-          <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-            <TrendingUp className="w-5 h-5 text-green-600" />
+          <span className="text-xs sm:text-sm font-medium text-gray-600">Ingresos del Mes</span>
+          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-100 rounded-full flex items-center justify-center">
+            <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
           </div>
         </div>
-        <p className="text-3xl font-bold text-gray-900">Q{totalIncome.toFixed(2)}</p>
+        <p className="text-2xl sm:text-3xl font-bold text-gray-900">Q{totalIncome.toFixed(2)}</p>
         <p className="text-sm text-green-600 mt-1 flex items-center gap-1">
           <TrendingUp className="w-4 h-4" />
           Ingresos
@@ -38,14 +38,14 @@ export default function SummaryCards({
       </div>
 
       {/* Total Expense */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="bg-white rounded-lg shadow p-4 sm:p-6">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-gray-600">Gastos del Mes</span>
-          <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
-            <TrendingDown className="w-5 h-5 text-red-600" />
+          <span className="text-xs sm:text-sm font-medium text-gray-600">Gastos del Mes</span>
+          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-red-100 rounded-full flex items-center justify-center">
+            <TrendingDown className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
           </div>
         </div>
-        <p className="text-3xl font-bold text-gray-900">Q{totalExpense.toFixed(2)}</p>
+        <p className="text-2xl sm:text-3xl font-bold text-gray-900">Q{totalExpense.toFixed(2)}</p>
         <p className="text-sm text-red-600 mt-1 flex items-center gap-1">
           <TrendingDown className="w-4 h-4" />
           Egresos
@@ -53,16 +53,16 @@ export default function SummaryCards({
       </div>
 
       {/* Balance */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="bg-white rounded-lg shadow p-4 sm:p-6">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-gray-600">Balance del Mes</span>
-          <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+          <span className="text-xs sm:text-sm font-medium text-gray-600">Balance del Mes</span>
+          <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center ${
             balance >= 0 ? 'bg-blue-100' : 'bg-orange-100'
           }`}>
-            <Wallet className={`w-5 h-5 ${balance >= 0 ? 'text-blue-600' : 'text-orange-600'}`} />
+            <Wallet className={`w-4 h-4 sm:w-5 sm:h-5 ${balance >= 0 ? 'text-blue-600' : 'text-orange-600'}`} />
           </div>
         </div>
-        <p className={`text-3xl font-bold ${balance >= 0 ? 'text-blue-600' : 'text-orange-600'}`}>
+        <p className={`text-2xl sm:text-3xl font-bold ${balance >= 0 ? 'text-blue-600' : 'text-orange-600'}`}>
           Q{balance.toFixed(2)}
         </p>
         <p className="text-sm text-gray-500 mt-1">
@@ -71,20 +71,20 @@ export default function SummaryCards({
       </div>
 
       {/* Budget Progress */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="bg-white rounded-lg shadow p-4 sm:p-6">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-gray-600">Presupuesto</span>
-          <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+          <span className="text-xs sm:text-sm font-medium text-gray-600">Presupuesto</span>
+          <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center ${
             isOverBudget ? 'bg-red-100' : 'bg-purple-100'
           }`}>
             {isOverBudget ? (
-              <AlertCircle className="w-5 h-5 text-red-600" />
+              <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
             ) : (
-              <PiggyBank className="w-5 h-5 text-purple-600" />
+              <PiggyBank className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
             )}
           </div>
         </div>
-        <p className="text-3xl font-bold text-gray-900">
+        <p className="text-2xl sm:text-3xl font-bold text-gray-900">
           {budgetPercentage.toFixed(1)}%
         </p>
         <div className="mt-2">
@@ -104,28 +104,28 @@ export default function SummaryCards({
       </div>
 
       {/* Total Accounts Balance */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="bg-white rounded-lg shadow p-4 sm:p-6">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-gray-600">Balance en Cuentas</span>
-          <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center">
-            <CreditCard className="w-5 h-5 text-indigo-600" />
+          <span className="text-xs sm:text-sm font-medium text-gray-600">Balance en Cuentas</span>
+          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-indigo-100 rounded-full flex items-center justify-center">
+            <CreditCard className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
           </div>
         </div>
-        <p className="text-3xl font-bold text-gray-900">Q{accountsBalance.toFixed(2)}</p>
+        <p className="text-2xl sm:text-3xl font-bold text-gray-900">Q{accountsBalance.toFixed(2)}</p>
         <p className="text-sm text-gray-500 mt-1">
           Total disponible
         </p>
       </div>
 
       {/* Savings Rate */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="bg-white rounded-lg shadow p-4 sm:p-6">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-gray-600">Tasa de Ahorro</span>
-          <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-            <PiggyBank className="w-5 h-5 text-emerald-600" />
+          <span className="text-xs sm:text-sm font-medium text-gray-600">Tasa de Ahorro</span>
+          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+            <PiggyBank className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
           </div>
         </div>
-        <p className="text-3xl font-bold text-gray-900">
+        <p className="text-2xl sm:text-3xl font-bold text-gray-900">
           {totalIncome > 0 ? ((balance / totalIncome) * 100).toFixed(1) : '0.0'}%
         </p>
         <p className="text-sm text-gray-500 mt-1">

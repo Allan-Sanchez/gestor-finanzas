@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { X } from 'lucide-react';
 import { Modal, Input, Select, Button } from '../ui';
 import type { TransactionWithRelations, TransactionInsert, TransactionUpdate, Account, Category } from '../../types';
 
@@ -148,24 +147,14 @@ export default function TransactionForm({
   );
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-        {/* Header */}
-        <div className="sticky top-0 bg-white flex items-center justify-between p-6 border-b border-gray-200 z-10">
-          <h2 className="text-xl font-semibold text-gray-900">
-            {transaction ? 'Editar Transacción' : 'Nueva Transacción'}
-          </h2>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
-
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title={transaction ? 'Editar Transacción' : 'Nueva Transacción'}
+      size="lg"
+    >
+      <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
                 Fecha *
@@ -212,7 +201,7 @@ export default function TransactionForm({
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="account_id" className="block text-sm font-medium text-gray-700 mb-1">
                 Cuenta *
@@ -251,7 +240,7 @@ export default function TransactionForm({
             )}
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
                 Monto *
@@ -322,7 +311,6 @@ export default function TransactionForm({
             </Button>
           </div>
         </form>
-      </div>
     </Modal>
   );
 }

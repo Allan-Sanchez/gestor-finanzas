@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import type { Database } from '../../types/database.types';
+import { useIsMobile } from '../../hooks/useIsMobile';
 
 type Transaction = Database['public']['Tables']['transactions']['Row'];
 
@@ -15,12 +16,15 @@ interface MonthData {
 }
 
 export default function MonthlyTrends({ transactions }: MonthlyTrendsProps) {
-  // Get last 6 months data
+  const isMobile = useIsMobile();
+
+  // Get last 6 months data (or 3 on mobile)
   const monthlyData = useMemo(() => {
-    const last6Months: MonthData[] = [];
+    const monthsToShow = isMobile ? 3 : 6;
+    const lastMonths: MonthData[] = [];
     const now = new Date();
 
-    for (let i = 5; i >= 0; i--) {
+    for (let i = monthsToShow - 1; i >= 0; i--) {
       const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
       const monthKey = date.toISOString().slice(0, 7);
 
@@ -36,7 +40,7 @@ export default function MonthlyTrends({ transactions }: MonthlyTrendsProps) {
         .filter(t => t.type === 'expense')
         .reduce((sum, t) => sum + t.amount, 0);
 
-      last6Months.push({
+      lastMonths.push({
         month: date.toLocaleDateString('es-GT', { month: 'short' }),
         income,
         expense,
@@ -44,8 +48,8 @@ export default function MonthlyTrends({ transactions }: MonthlyTrendsProps) {
       });
     }
 
-    return last6Months;
-  }, [transactions]);
+    return lastMonths;
+  }, [transactions, isMobile]);
 
   // Find max value for scaling
   const maxValue = useMemo(() => {
@@ -56,10 +60,12 @@ export default function MonthlyTrends({ transactions }: MonthlyTrendsProps) {
   }, [monthlyData]);
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-6">Tendencias de los Últimos 6 Meses</h3>
+    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+      <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">
+        Tendencias de los Últimos {isMobile ? '3' : '6'} Meses
+      </h3>
 
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         {monthlyData.map((data, index) => (
           <div key={index}>
             <div className="flex items-center justify-between mb-2">
@@ -103,18 +109,18 @@ export default function MonthlyTrends({ transactions }: MonthlyTrendsProps) {
       </div>
 
       {/* Legend */}
-      <div className="flex items-center justify-center gap-6 mt-6 pt-4 border-t">
-        <div className="flex items-center gap-2">
+      <div className="flex items-center justify-center gap-3 sm:gap-6 mt-4 sm:mt-6 pt-4 border-t">
+        <div className="flex items-center gap-1 sm:gap-2">
           <div className="w-3 h-3 bg-green-500 rounded-full" />
-          <span className="text-sm text-gray-600">Ingresos</span>
+          <span className="text-xs sm:text-sm text-gray-600">Ingresos</span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
           <div className="w-3 h-3 bg-red-500 rounded-full" />
-          <span className="text-sm text-gray-600">Gastos</span>
+          <span className="text-xs sm:text-sm text-gray-600">Gastos</span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
           <div className="w-3 h-3 bg-blue-600 rounded-full" />
-          <span className="text-sm text-gray-600">Balance</span>
+          <span className="text-xs sm:text-sm text-gray-600">Balance</span>
         </div>
       </div>
     </div>

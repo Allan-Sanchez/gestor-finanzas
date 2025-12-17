@@ -118,10 +118,10 @@ export default function AccountBalanceReport({ accounts, transactions }: Account
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">Reporte de Cuentas</h3>
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Reporte de Cuentas</h3>
         <Wallet className="w-5 h-5 text-gray-400" />
       </div>
 

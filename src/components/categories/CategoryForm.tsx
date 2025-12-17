@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { X } from 'lucide-react';
 import { Modal, Input, Select, Button } from '../ui';
 import type { Category, CategoryInsert, CategoryUpdate } from '../../types';
 
@@ -119,23 +118,13 @@ export default function CategoryForm({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-lg">
-        {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
-          <h2 className="text-xl font-semibold text-gray-900">
-            {category ? 'Editar Categoría' : 'Nueva Categoría'}
-          </h2>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
-
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title={category ? 'Editar Categoría' : 'Nueva Categoría'}
+      size="md"
+    >
+      <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
               Nombre de la categoría *
@@ -268,7 +257,6 @@ export default function CategoryForm({
             </Button>
           </div>
         </form>
-      </div>
     </Modal>
   );
 }

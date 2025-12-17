@@ -13,7 +13,7 @@ const navItems = [
   { path: '/transactions', icon: Receipt, label: 'Transacciones' },
   { path: '/budgets', icon: PieChart, label: 'Presupuestos' },
   { path: '/reports', icon: BarChart3, label: 'Reportes' },
-  { path: '/settings', icon: Menu, label: 'Más' },
+  { path: '/more', icon: Menu, label: 'Más' },
 ];
 
 export default function MobileNav() {

@@ -65,39 +65,39 @@ export default function RecentTransactions({ transactions, limit = 5 }: RecentTr
 
   if (recentTransactions.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-6">Transacciones Recientes</h3>
-        <div className="text-center py-12 text-gray-500">
-          <p>No hay transacciones registradas</p>
+      <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">Transacciones Recientes</h3>
+        <div className="text-center py-8 sm:py-12 text-gray-500">
+          <p className="text-sm">No hay transacciones registradas</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">Transacciones Recientes</h3>
+    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+      <div className="flex items-center justify-between mb-4 sm:mb-6">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Transacciones Recientes</h3>
         <Link
           to="/transactions"
-          className="text-sm text-blue-600 hover:text-blue-700 flex items-center gap-1"
+          className="text-xs sm:text-sm text-blue-600 hover:text-blue-700 flex items-center gap-1"
         >
           Ver todas
-          <ExternalLink className="w-4 h-4" />
+          <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
         </Link>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-2 sm:space-y-3">
         {recentTransactions.map((transaction) => (
           <div
             key={transaction.id}
             className="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors"
           >
             {/* Left side: Icon, Category/Type, Date */}
-            <div className="flex items-center gap-3 flex-1">
-              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${getTypeColor(transaction.type)}`}>
+            <div className="flex items-center gap-2 sm:gap-3 flex-1">
+              <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center ${getTypeColor(transaction.type)}`}>
                 {transaction.categories ? (
-                  <span className="text-lg">{transaction.categories.icon}</span>
+                  <span className="text-base sm:text-lg">{transaction.categories.icon}</span>
                 ) : (
                   getTypeIcon(transaction.type)
                 )}

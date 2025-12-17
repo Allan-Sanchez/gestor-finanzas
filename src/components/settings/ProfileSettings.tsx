@@ -55,13 +55,13 @@ export default function ProfileSettings() {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <div className="flex items-center gap-2 mb-6">
-        <User className="w-5 h-5 text-gray-700" />
-        <h3 className="text-lg font-semibold text-gray-900">Perfil de Usuario</h3>
+    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+      <div className="flex items-center gap-2 mb-4 sm:mb-6">
+        <User className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Perfil de Usuario</h3>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
         {/* Email (read-only) */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
