@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Plus, Wallet } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Button, Loading } from '../components/ui';
+import { Card, CardContent, Button, Loading } from '../components/ui';
 import { useAuth } from '../hooks/useAuth';
 import { useAccounts, useCreateAccount, useUpdateAccount, useDeleteAccount } from '../hooks/useAccounts';
 import AccountCard from '../components/accounts/AccountCard';
