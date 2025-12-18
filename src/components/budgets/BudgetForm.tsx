@@ -1,6 +1,7 @@
 import { X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useCategories } from '../../hooks/useCategories';
+import { useAuth } from '../../hooks/useAuth';
 import type { Database } from '../../types/database.types';
 
 type Budget = Database['public']['Tables']['budgets']['Row'];
@@ -13,7 +14,8 @@ interface BudgetFormProps {
 }
 
 export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: BudgetFormProps) {
-  const { data: categories } = useCategories();
+  const { user } = useAuth();
+  const { data: categories } = useCategories(user?.id);
 
   // Filter only expense categories
   const expenseCategories = categories?.filter(cat => cat.type === 'expense') || [];
