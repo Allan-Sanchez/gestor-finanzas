@@ -11,6 +11,7 @@ import SettingsPage from './pages/SettingsPage';
 import MorePage from './pages/MorePage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import MainLayout from './components/layout/MainLayout';
+import PWAUpdatePrompt from './components/PWAUpdatePrompt';
 
 // Configurar React Query
 const queryClient = new QueryClient({
@@ -25,6 +26,7 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <PWAUpdatePrompt />
       <BrowserRouter>
         <Routes>
           {/* Ruta pública de autenticación */}

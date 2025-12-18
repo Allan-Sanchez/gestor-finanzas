@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   FolderOpen,
   Wallet,
   Settings,
   ChevronRight,
   User,
-  Bell,
-  Database
+  LogOut
 } from 'lucide-react';
-import { Card, CardContent } from '../components/ui';
+import { Card, CardContent, Button } from '../components/ui';
+import { useAuth } from '../hooks/useAuth';
 
 interface MenuItem {
   path: string;
@@ -43,6 +43,16 @@ const menuItems: MenuItem[] = [
 ];
 
 export default function MorePage() {
+  const { signOut, user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
+      await signOut();
+      navigate('/auth');
+    }
+  };
+
   return (
     <div className="space-y-4 sm:space-y-6">
       {/* Header */}
@@ -82,22 +92,39 @@ export default function MorePage() {
         })}
       </div>
 
-      {/* Additional Info */}
-      <Card className="mt-6">
+      {/* User Info and Logout */}
+      <Card>
         <CardContent className="p-4">
-          <div className="flex items-start gap-3">
+          <div className="flex items-start gap-3 mb-4">
             <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
               <User className="w-5 h-5 text-blue-600" />
             </div>
             <div className="flex-1">
               <h4 className="text-sm font-semibold text-gray-900 mb-1">
-                Gestor de Finanzas Personales
+                {user?.email || 'Usuario'}
               </h4>
               <p className="text-xs text-gray-600">
-                Versión 1.0.0
+                Gestor de Finanzas Personales
               </p>
             </div>
           </div>
+          <Button
+            onClick={handleSignOut}
+            variant="danger"
+            className="w-full"
+          >
+            <LogOut className="w-4 h-4 mr-2" />
+            Cerrar Sesión
+          </Button>
+        </CardContent>
+      </Card>
+
+      {/* App Version */}
+      <Card>
+        <CardContent className="p-4 text-center">
+          <p className="text-xs text-gray-600">
+            Versión 1.0.0
+          </p>
         </CardContent>
       </Card>
     </div>
