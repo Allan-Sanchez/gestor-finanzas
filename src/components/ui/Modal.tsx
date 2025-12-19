@@ -61,10 +61,10 @@ export default function Modal({
       />
 
       {/* Modal */}
-      <div className="flex min-h-full items-center justify-center p-4">
+      <div className="flex min-h-full items-center justify-center p-4 pb-28 md:pb-4">
         <div
           className={cn(
-            'relative w-full bg-white rounded-lg shadow-xl transform transition-all',
+            'relative w-full bg-white rounded-lg shadow-xl transform transition-all my-8',
             sizes[size]
           )}
           onClick={(e) => e.stopPropagation()}
@@ -83,7 +83,7 @@ export default function Modal({
           </div>
 
           {/* Content */}
-          <div className="p-4 sm:p-6">{children}</div>
+          <div className="p-4 sm:p-6 max-h-[calc(100vh-12rem)] md:max-h-[calc(100vh-8rem)] overflow-y-auto overflow-x-hidden">{children}</div>
         </div>
       </div>
     </div>
