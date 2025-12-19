@@ -88,8 +88,8 @@ export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: Bud
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-full sm:max-w-md">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 pb-28 md:pb-4 z-50 overflow-y-auto">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-full sm:max-w-md my-8">
         {/* Header */}
         <div className="flex items-center justify-between p-4 sm:p-6 border-b">
           <h2 className="text-lg sm:text-xl font-semibold">
@@ -105,16 +105,16 @@ export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: Bud
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 max-h-[calc(100vh-12rem)] md:max-h-[calc(100vh-8rem)] overflow-y-auto overflow-x-hidden">
           {/* Category */}
-          <div>
+          <div className="min-w-0">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Categoría *
             </label>
             <select
               value={formData.category_id}
               onChange={(e) => handleChange('category_id', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+              className={`w-full min-w-0 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent truncate ${
                 errors.category_id ? 'border-red-300' : 'border-gray-300'
               }`}
               disabled={isLoading || !!budget} // Can't change category when editing
@@ -137,7 +137,7 @@ export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: Bud
           </div>
 
           {/* Month */}
-          <div>
+          <div className="min-w-0">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Mes *
             </label>
@@ -145,7 +145,7 @@ export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: Bud
               type="month"
               value={formData.month}
               onChange={(e) => handleChange('month', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+              className={`w-full min-w-0 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                 errors.month ? 'border-red-300' : 'border-gray-300'
               }`}
               disabled={isLoading || !!budget} // Can't change month when editing
@@ -156,18 +156,18 @@ export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: Bud
           </div>
 
           {/* Amount */}
-          <div>
+          <div className="min-w-0">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Monto Presupuestado *
             </label>
-            <div className="relative">
+            <div className="relative min-w-0">
               <span className="absolute left-3 top-2 text-gray-500">Q</span>
               <input
                 type="number"
                 step="0.01"
                 value={formData.amount}
                 onChange={(e) => handleChange('amount', e.target.value)}
-                className={`w-full pl-8 pr-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                className={`w-full min-w-0 pl-8 pr-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                   errors.amount ? 'border-red-300' : 'border-gray-300'
                 }`}
                 placeholder="0.00"
@@ -180,7 +180,7 @@ export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: Bud
           </div>
 
           {/* Alert Percentage */}
-          <div>
+          <div className="min-w-0">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Alerta al alcanzar (%)
             </label>
@@ -191,7 +191,7 @@ export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: Bud
               step="1"
               value={formData.alert_percentage}
               onChange={(e) => handleChange('alert_percentage', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+              className={`w-full min-w-0 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                 errors.alert_percentage ? 'border-red-300' : 'border-gray-300'
               }`}
               placeholder="80"
