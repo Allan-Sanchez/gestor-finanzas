@@ -5,10 +5,12 @@ import {
   Settings,
   ChevronRight,
   User,
-  LogOut
+  LogOut,
+  RefreshCw
 } from 'lucide-react';
 import { Card, CardContent, Button } from '../components/ui';
 import { useAuth } from '../hooks/useAuth';
+import { clearPWACache } from '../utils/pwa';
 
 interface MenuItem {
   path: string;
@@ -50,6 +52,16 @@ export default function MorePage() {
     if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
       await signOut();
       navigate('/auth');
+    }
+  };
+
+  const handleClearCache = async () => {
+    if (confirm('¿Estás seguro que deseas limpiar el caché? Esto recargará la aplicación para obtener la última versión.')) {
+      try {
+        await clearPWACache();
+      } catch (error) {
+        alert('Error al limpiar el caché. Por favor, intenta nuevamente.');
+      }
     }
   };
 
@@ -115,6 +127,33 @@ export default function MorePage() {
           >
             <LogOut className="w-4 h-4 mr-2" />
             Cerrar Sesión
+          </Button>
+        </CardContent>
+      </Card>
+
+      {/* Clear Cache */}
+      <Card>
+        <CardContent className="p-4">
+          <div className="flex items-start gap-3 mb-3">
+            <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0">
+              <RefreshCw className="w-5 h-5 text-orange-600" />
+            </div>
+            <div className="flex-1">
+              <h4 className="text-sm font-semibold text-gray-900 mb-1">
+                Actualizar aplicación
+              </h4>
+              <p className="text-xs text-gray-600">
+                Limpia el caché y recarga la aplicación para obtener la última versión
+              </p>
+            </div>
+          </div>
+          <Button
+            onClick={handleClearCache}
+            variant="secondary"
+            className="w-full"
+          >
+            <RefreshCw className="w-4 h-4 mr-2" />
+            Limpiar caché y actualizar
           </Button>
         </CardContent>
       </Card>
