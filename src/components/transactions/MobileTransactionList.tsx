@@ -1,5 +1,7 @@
 import { ArrowUpRight, ArrowDownRight, ArrowRightLeft, Edit, Trash2 } from 'lucide-react';
 import type { TransactionWithRelations } from '../../types';
+import { useState } from 'react';
+import { ConfirmDialog } from '../ui';
 
 interface MobileTransactionListProps {
   transactions: TransactionWithRelations[];
@@ -8,6 +10,9 @@ interface MobileTransactionListProps {
 }
 
 export default function MobileTransactionList({ transactions, onEdit, onDelete }: MobileTransactionListProps) {
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const transactionToDelete = transactions.find(t => t.id === deletingId);
+
   const getTypeIcon = (type: string) => {
     switch (type) {
       case 'income':
@@ -140,7 +145,7 @@ export default function MobileTransactionList({ transactions, onEdit, onDelete }
               <span className="text-sm font-medium">Editar</span>
             </button>
             <button
-              onClick={() => onDelete(transaction.id)}
+              onClick={() => setDeletingId(transaction.id)}
               className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 active:bg-red-200 transition-colors min-h-[44px]"
             >
               <Trash2 className="w-4 h-4" />
@@ -149,6 +154,23 @@ export default function MobileTransactionList({ transactions, onEdit, onDelete }
           </div>
         </div>
       ))}
+
+      {/* Confirm Delete Dialog */}
+      <ConfirmDialog
+        isOpen={!!deletingId}
+        onClose={() => setDeletingId(null)}
+        onConfirm={() => {
+          if (deletingId) {
+            onDelete(deletingId);
+            setDeletingId(null);
+          }
+        }}
+        title="Eliminar Transacción"
+        message={`¿Estás seguro de que deseas eliminar la transacción "${transactionToDelete?.description}"? Esta acción no se puede deshacer.`}
+        confirmText="Eliminar"
+        cancelText="Cancelar"
+        variant="danger"
+      />
     </div>
   );
 }

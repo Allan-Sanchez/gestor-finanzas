@@ -1,5 +1,5 @@
 import { MoreVertical, Edit2, Trash2, TrendingUp, TrendingDown, ArrowRightLeft } from 'lucide-react';
-import { Badge } from '../ui';
+import { Badge, ConfirmDialog } from '../ui';
 import type { TransactionWithRelations } from '../../types';
 import { formatCurrency, formatDate } from '../../utils/format';
 import { useState } from 'react';
@@ -36,6 +36,7 @@ const statusLabels = {
 
 export default function TransactionRow({ transaction, onEdit, onDelete }: TransactionRowProps) {
   const [showMenu, setShowMenu] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const Icon = transactionTypeIcons[transaction.type];
 
   return (
@@ -113,9 +114,7 @@ export default function TransactionRow({ transaction, onEdit, onDelete }: Transa
               </button>
               <button
                 onClick={() => {
-                  if (confirm('¿Estás seguro de que deseas eliminar esta transacción?')) {
-                    onDelete(transaction.id);
-                  }
+                  setShowDeleteDialog(true);
                   setShowMenu(false);
                 }}
                 className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
@@ -126,6 +125,18 @@ export default function TransactionRow({ transaction, onEdit, onDelete }: Transa
             </div>
           </>
         )}
+
+        {/* Confirm Delete Dialog */}
+        <ConfirmDialog
+          isOpen={showDeleteDialog}
+          onClose={() => setShowDeleteDialog(false)}
+          onConfirm={() => onDelete(transaction.id)}
+          title="Eliminar Transacción"
+          message={`¿Estás seguro de que deseas eliminar la transacción "${transaction.description}"? Esta acción no se puede deshacer.`}
+          confirmText="Eliminar"
+          cancelText="Cancelar"
+          variant="danger"
+        />
       </td>
     </tr>
   );

@@ -1,6 +1,7 @@
 import { MoreVertical, Edit, Trash2, TrendingUp, TrendingDown, AlertCircle } from 'lucide-react';
 import { useState } from 'react';
 import type { Database } from '../../types/database.types';
+import { ConfirmDialog } from '../ui';
 
 type Budget = Database['public']['Tables']['budgets']['Row'] & {
   categories: {
@@ -44,11 +45,6 @@ export default function BudgetCard({ budget, spent, onEdit, onDelete }: BudgetCa
     return 'Dentro del presupuesto';
   };
 
-  const handleDelete = () => {
-    onDelete(budget.id);
-    setShowDeleteConfirm(false);
-    setShowMenu(false);
-  };
 
   return (
     <div className="bg-white rounded-lg shadow p-6">
@@ -99,7 +95,10 @@ export default function BudgetCard({ budget, spent, onEdit, onDelete }: BudgetCa
                   Editar
                 </button>
                 <button
-                  onClick={() => setShowDeleteConfirm(true)}
+                  onClick={() => {
+                    setShowDeleteConfirm(true);
+                    setShowMenu(false);
+                  }}
                   className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -145,31 +144,17 @@ export default function BudgetCard({ budget, spent, onEdit, onDelete }: BudgetCa
         </div>
       </div>
 
-      {/* Delete Confirmation Modal */}
-      {showDeleteConfirm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-6 max-w-sm w-full">
-            <h3 className="text-lg font-semibold mb-2">Confirmar eliminación</h3>
-            <p className="text-gray-600 mb-4">
-              ¿Estás seguro de que deseas eliminar este presupuesto? Esta acción no se puede deshacer.
-            </p>
-            <div className="flex gap-2 justify-end">
-              <button
-                onClick={() => setShowDeleteConfirm(false)}
-                className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
-              >
-                Cancelar
-              </button>
-              <button
-                onClick={handleDelete}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
-              >
-                Eliminar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Confirm Delete Dialog */}
+      <ConfirmDialog
+        isOpen={showDeleteConfirm}
+        onClose={() => setShowDeleteConfirm(false)}
+        onConfirm={() => onDelete(budget.id)}
+        title="Eliminar Presupuesto"
+        message={`¿Estás seguro de que deseas eliminar el presupuesto de "${budget.categories.name}"? Esta acción no se puede deshacer.`}
+        confirmText="Eliminar"
+        cancelText="Cancelar"
+        variant="danger"
+      />
     </div>
   );
 }

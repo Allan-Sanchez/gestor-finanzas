@@ -1,5 +1,5 @@
 import { MoreVertical, Edit2, Trash2 } from 'lucide-react';
-import { Card, CardContent, Badge } from '../ui';
+import { Card, CardContent, Badge, ConfirmDialog } from '../ui';
 import type { Category } from '../../types';
 import { formatCurrency } from '../../utils/format';
 import { useState } from 'react';
@@ -22,6 +22,7 @@ const categoryTypeColors = {
 
 export default function CategoryCard({ category, onEdit, onDelete }: CategoryCardProps) {
   const [showMenu, setShowMenu] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   return (
     <Card className="relative hover:shadow-md transition-shadow">
@@ -74,9 +75,7 @@ export default function CategoryCard({ category, onEdit, onDelete }: CategoryCar
                   </button>
                   <button
                     onClick={() => {
-                      if (confirm('¿Estás seguro de que deseas eliminar esta categoría?')) {
-                        onDelete(category.id);
-                      }
+                      setShowDeleteDialog(true);
                       setShowMenu(false);
                     }}
                     className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
@@ -102,6 +101,18 @@ export default function CategoryCard({ category, onEdit, onDelete }: CategoryCar
           </div>
         )}
       </CardContent>
+
+      {/* Confirm Delete Dialog */}
+      <ConfirmDialog
+        isOpen={showDeleteDialog}
+        onClose={() => setShowDeleteDialog(false)}
+        onConfirm={() => onDelete(category.id)}
+        title="Eliminar Categoría"
+        message={`¿Estás seguro de que deseas archivar la categoría "${category.name}"? Esta categoría se ocultará pero permanecerá en tu historial de transacciones.`}
+        confirmText="Archivar"
+        cancelText="Cancelar"
+        variant="warning"
+      />
     </Card>
   );
 }

@@ -5,3 +5,4 @@ export { default as Modal, ModalFooter } from './Modal';
 export { default as Badge } from './Badge';
 export { default as Loading } from './Loading';
 export { Card, CardHeader, CardTitle, CardContent } from './Card';
+export { default as ConfirmDialog } from './ConfirmDialog';

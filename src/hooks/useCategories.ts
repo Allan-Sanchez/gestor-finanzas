@@ -102,3 +102,24 @@ export function useCategoriesByType(userId: string | undefined, type: 'income' |
     enabled: !!userId,
   });
 }
+
+// Hook para obtener TODAS las categorías (incluyendo archivadas)
+// Útil para mostrar el historial de transacciones con categorías archivadas
+export function useAllCategories(userId: string | undefined) {
+  return useQuery({
+    queryKey: ['categories', 'all', userId],
+    queryFn: async () => {
+      if (!userId) throw new Error('User ID is required');
+
+      const { data, error } = await supabase
+        .from('categories')
+        .select('*')
+        .eq('user_id', userId)
+        .order('name');
+
+      if (error) throw error;
+      return data as Category[];
+    },
+    enabled: !!userId,
+  });
+}

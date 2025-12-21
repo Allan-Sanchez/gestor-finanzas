@@ -1,6 +1,8 @@
 import { Edit2, Trash2 } from 'lucide-react';
 import type { Category } from '../../types';
 import { formatCurrency } from '../../utils/format';
+import { useState } from 'react';
+import { ConfirmDialog } from '../ui';
 
 interface MobileCategoryListProps {
   categories: Category[];
@@ -19,6 +21,9 @@ const categoryTypeColors = {
 };
 
 export default function MobileCategoryList({ categories, onEdit, onDelete }: MobileCategoryListProps) {
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const categoryToDelete = categories.find(c => c.id === deletingId);
+
   return (
     <div className="space-y-3">
       {categories.map((category) => (
@@ -66,11 +71,7 @@ export default function MobileCategoryList({ categories, onEdit, onDelete }: Mob
               <span className="text-sm font-medium">Editar</span>
             </button>
             <button
-              onClick={() => {
-                if (confirm('¿Estás seguro de que deseas eliminar esta categoría?')) {
-                  onDelete(category.id);
-                }
-              }}
+              onClick={() => setDeletingId(category.id)}
               className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 active:bg-red-200 transition-colors min-h-[44px]"
             >
               <Trash2 className="w-4 h-4" />
@@ -79,6 +80,23 @@ export default function MobileCategoryList({ categories, onEdit, onDelete }: Mob
           </div>
         </div>
       ))}
+
+      {/* Confirm Delete Dialog */}
+      <ConfirmDialog
+        isOpen={!!deletingId}
+        onClose={() => setDeletingId(null)}
+        onConfirm={() => {
+          if (deletingId) {
+            onDelete(deletingId);
+            setDeletingId(null);
+          }
+        }}
+        title="Eliminar Categoría"
+        message={`¿Estás seguro de que deseas archivar la categoría "${categoryToDelete?.name}"? Esta categoría se ocultará pero permanecerá en tu historial de transacciones.`}
+        confirmText="Archivar"
+        cancelText="Cancelar"
+        variant="warning"
+      />
     </div>
   );
 }

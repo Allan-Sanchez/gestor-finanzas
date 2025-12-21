@@ -43,17 +43,31 @@ Aplicación web completa para el control y gestión de presupuesto personal, con
   - Tendencias y proyecciones
   - Exportación de datos
 
+- **Configuración Personalizada**
+  - Gestión de perfil de usuario
+  - Configuración de moneda predeterminada
+  - Administración de datos (exportar/importar)
+  - Configuración de notificaciones
+
+- **Progressive Web App (PWA)**
+  - Instalable como app nativa en móvil y escritorio
+  - Funciona sin conexión (modo offline)
+  - Actualizaciones automáticas
+  - Cache inteligente para mejor rendimiento
+  - Ver [PWA-INSTRUCTIONS.md](PWA-INSTRUCTIONS.md) para más detalles
+
 ## 🛠️ Stack Tecnológico
 
 ### Frontend
-- **React 18+** con TypeScript
-- **Vite** como build tool
+- **React 19** con TypeScript
+- **Vite 7** como build tool
 - **Tailwind CSS** para estilos
 - **React Router** para navegación
 - **React Query (TanStack Query)** para state management y caché
 - **Recharts** para visualizaciones
 - **date-fns** para manejo de fechas
 - **Lucide React** para iconos
+- **vite-plugin-pwa** para funcionalidad PWA
 
 ### Backend
 - **Supabase** como BaaS (Backend as a Service)
@@ -112,18 +126,27 @@ npm install
 cp .env.example .env
 ```
 
-2. Abre el archivo `.env` y configura las credenciales de Supabase:
+2. Abre el archivo `.env` y configura las credenciales:
 
 ```env
+# Supabase Configuration
 VITE_SUPABASE_URL=tu_url_de_supabase
 VITE_SUPABASE_ANON_KEY=tu_clave_anonima
+
+# Application Configuration
+VITE_APP_NAME="Gestor de Finanzas"
+VITE_DEFAULT_CURRENCY=GTQ
 ```
 
-**¿Dónde encuentro estas credenciales?**
+**¿Dónde encuentro las credenciales de Supabase?**
 - Ve a tu proyecto en Supabase
 - Haz clic en **Settings** (⚙️) → **API**
 - Copia el **Project URL** → `VITE_SUPABASE_URL`
 - Copia el **anon/public key** → `VITE_SUPABASE_ANON_KEY`
+
+**Configuración de la aplicación:**
+- `VITE_APP_NAME`: Nombre de tu aplicación
+- `VITE_DEFAULT_CURRENCY`: Código de moneda (GTQ, USD, EUR, etc.)
 
 ### 5. Ejecutar la Aplicación
 
@@ -157,6 +180,11 @@ Si quieres tener datos de ejemplo para explorar la aplicación:
    - Transacciones de los últimos 3 meses
    - Presupuestos para el mes actual
 
+## 📖 Documentación Adicional
+
+- **[Manual de Usuario](MANUAL-USUARIO.md)** - Guía completa para usuarios nuevos que explica paso a paso cómo usar la aplicación
+- **[Instrucciones PWA](PWA-INSTRUCTIONS.md)** - Cómo instalar la aplicación como app nativa en tu dispositivo
+
 ## 📁 Estructura del Proyecto
 
 ```
@@ -170,8 +198,10 @@ gestor-finanzas/
 │   │   ├── accounts/       # Componentes de cuentas
 │   │   ├── budgets/        # Componentes de presupuestos
 │   │   ├── reports/        # Componentes de reportes
+│   │   ├── settings/       # Componentes de configuración
 │   │   ├── layout/         # Layout y navegación
-│   │   └── ui/             # Componentes UI reutilizables
+│   │   ├── ui/             # Componentes UI reutilizables
+│   │   └── PWAUpdatePrompt.tsx  # Notificación de actualizaciones PWA
 │   ├── hooks/              # Custom hooks
 │   ├── lib/                # Configuración (Supabase)
 │   ├── pages/              # Páginas principales
@@ -179,11 +209,18 @@ gestor-finanzas/
 │   ├── utils/              # Funciones de utilidad
 │   ├── App.tsx             # Componente principal
 │   └── main.tsx            # Punto de entrada
+├── public/                 # Recursos estáticos y PWA
+│   ├── pwa-*.png           # Iconos PWA
+│   ├── manifest-icon.svg   # Icono fuente
+│   └── netlify.toml        # Configuración Netlify
 ├── supabase-schema.sql     # Schema de la base de datos
 ├── supabase-seed.sql       # Datos de ejemplo
+├── supabase-fix-user.sql   # Script para corrección de usuarios
 ├── .env                    # Variables de entorno (no commitear)
 ├── .env.example            # Ejemplo de variables
-└── README.md               # Este archivo
+├── README.md               # Documentación técnica
+├── MANUAL-USUARIO.md       # Manual completo para usuarios
+└── PWA-INSTRUCTIONS.md     # Guía de instalación PWA
 ```
 
 ## 🗄️ Esquema de Base de Datos
@@ -218,8 +255,10 @@ gestor-finanzas/
 
 Edita el archivo `.env`:
 ```env
-VITE_DEFAULT_CURRENCY=USD  # o la moneda que prefieras
+VITE_DEFAULT_CURRENCY=GTQ  # o la moneda que prefieras (USD, EUR, MXN, etc.)
 ```
+
+**Nota:** La moneda también puede configurarse desde la sección de Configuración en la aplicación.
 
 ### Cambiar Colores
 
@@ -262,9 +301,15 @@ La aplicación está optimizada para:
 
 1. Sube tu código a GitHub
 2. Conecta el repositorio en [Netlify](https://netlify.com)
-3. Build command: `npm run build`
-4. Publish directory: `dist`
-5. Configura las variables de entorno
+3. Configura el build:
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+4. Configura las variables de entorno:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+   - `VITE_APP_NAME`
+   - `VITE_DEFAULT_CURRENCY`
+5. El archivo `public/netlify.toml` ya incluye la configuración de redirects para SPA routing
 
 ## 🐛 Troubleshooting
 
@@ -286,6 +331,13 @@ La aplicación está optimizada para:
 - Verifica que tengas transacciones en la base de datos
 - Comprueba la consola del navegador por errores
 - Asegúrate de que las funciones RPC estén creadas correctamente
+
+### Error: Usuario sin perfil o datos no se cargan
+Si después de registrarte los datos no se cargan correctamente:
+1. Ve al SQL Editor de Supabase
+2. Ejecuta el archivo `supabase-fix-user.sql`
+3. Este script crea perfiles faltantes para usuarios existentes
+4. Cierra sesión y vuelve a iniciar sesión
 
 ## 🤝 Contribuir
 

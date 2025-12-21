@@ -1,5 +1,5 @@
 import { Wallet, CreditCard, Banknote, PiggyBank, MoreVertical, Edit2, Trash2 } from 'lucide-react';
-import { Card, CardContent, Badge } from '../ui';
+import { Card, CardContent, Badge, ConfirmDialog } from '../ui';
 import type { Account } from '../../types';
 import { formatCurrency } from '../../utils/format';
 import { useState } from 'react';
@@ -33,6 +33,7 @@ const accountTypeColors = {
 
 export default function AccountCard({ account, onEdit, onDelete }: AccountCardProps) {
   const [showMenu, setShowMenu] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const Icon = accountIcons[account.type] || Wallet;
 
   return (
@@ -78,9 +79,7 @@ export default function AccountCard({ account, onEdit, onDelete }: AccountCardPr
                   </button>
                   <button
                     onClick={() => {
-                      if (confirm('¿Estás seguro de que deseas eliminar esta cuenta?')) {
-                        onDelete(account.id);
-                      }
+                      setShowDeleteDialog(true);
                       setShowMenu(false);
                     }}
                     className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
@@ -126,6 +125,18 @@ export default function AccountCard({ account, onEdit, onDelete }: AccountCardPr
           )}
         </div>
       </CardContent>
+
+      {/* Confirm Delete Dialog */}
+      <ConfirmDialog
+        isOpen={showDeleteDialog}
+        onClose={() => setShowDeleteDialog(false)}
+        onConfirm={() => onDelete(account.id)}
+        title="Eliminar Cuenta"
+        message={`¿Estás seguro de que deseas eliminar la cuenta "${account.name}"? Esta acción no se puede deshacer y eliminará también el historial de transacciones asociadas.`}
+        confirmText="Eliminar"
+        cancelText="Cancelar"
+        variant="danger"
+      />
     </Card>
   );
 }
