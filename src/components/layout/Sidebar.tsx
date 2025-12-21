@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { cn } from '../../utils/cn';
+import { ThemeToggle } from '../ui';
 
 const navItems = [
   { path: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
@@ -26,9 +27,9 @@ export default function Sidebar() {
   const { signOut, user } = useAuth();
 
   return (
-    <aside className="hidden md:flex md:flex-col md:w-64 bg-gray-900 text-white">
+    <aside className="hidden md:flex md:flex-col md:w-64 bg-gray-900 dark:bg-gray-950 text-white border-r border-gray-800 dark:border-gray-900">
       {/* Brand */}
-      <div className="p-6 border-b border-gray-800">
+      <div className="p-6 border-b border-gray-800 dark:border-gray-900">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-xl">
             💰
@@ -65,8 +66,8 @@ export default function Sidebar() {
       </nav>
 
       {/* User section */}
-      <div className="p-4 border-t border-gray-800">
-        <div className="flex items-center gap-3 px-4 py-3 mb-2 rounded-lg bg-gray-800">
+      <div className="p-4 border-t border-gray-800 dark:border-gray-900 space-y-2">
+        <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-800 dark:bg-gray-900">
           <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
             <span className="text-sm font-medium">
               {user?.email?.charAt(0).toUpperCase()}
@@ -78,9 +79,14 @@ export default function Sidebar() {
           </div>
         </div>
 
+        {/* Theme Toggle */}
+        <div className="px-4">
+          <ThemeToggle />
+        </div>
+
         <button
           onClick={signOut}
-          className="flex items-center gap-3 px-4 py-3 rounded-lg w-full text-gray-300 hover:bg-gray-800 hover:text-white transition-colors"
+          className="flex items-center gap-3 px-4 py-3 rounded-lg w-full text-gray-300 hover:bg-gray-800 dark:hover:bg-gray-900 hover:text-white transition-colors"
         >
           <LogOut size={20} />
           <span className="font-medium">Cerrar Sesión</span>
