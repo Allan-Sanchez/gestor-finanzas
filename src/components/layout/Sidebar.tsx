@@ -27,9 +27,9 @@ export default function Sidebar() {
   const { signOut, user } = useAuth();
 
   return (
-    <aside className="hidden md:flex md:flex-col md:w-64 bg-gray-900 dark:bg-gray-950 text-white border-r border-gray-800 dark:border-gray-900">
+    <aside className="hidden md:flex md:flex-col md:w-64 bg-gray-900 dark:bg-gray-950 text-white border-r border-gray-800 dark:border-gray-900 h-screen">
       {/* Brand */}
-      <div className="p-6 border-b border-gray-800 dark:border-gray-900">
+      <div className="p-6 border-b border-gray-800 dark:border-gray-900 flex-shrink-0">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-xl">
             💰
@@ -42,7 +42,7 @@ export default function Sidebar() {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 p-4 space-y-1">
+      <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
           return (
@@ -66,7 +66,7 @@ export default function Sidebar() {
       </nav>
 
       {/* User section */}
-      <div className="p-4 border-t border-gray-800 dark:border-gray-900 space-y-2">
+      <div className="p-4 border-t border-gray-800 dark:border-gray-900 space-y-2 flex-shrink-0">
         <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-800 dark:bg-gray-900">
           <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
             <span className="text-sm font-medium">

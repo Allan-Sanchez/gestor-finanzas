@@ -64,18 +64,18 @@ export default function Modal({
       <div className="flex min-h-full items-center justify-center p-4 pb-28 md:pb-4">
         <div
           className={cn(
-            'relative w-full bg-white rounded-lg shadow-xl transform transition-all my-8',
+            'relative w-full bg-white dark:bg-gray-800 rounded-lg shadow-xl transform transition-all my-8',
             sizes[size]
           )}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200">
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">{title}</h2>
+          <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-gray-100">{title}</h2>
             {showCloseButton && (
               <button
                 onClick={onClose}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
+                className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
               >
                 <X size={24} />
               </button>
@@ -99,7 +99,7 @@ export function ModalFooter({ children, className }: ModalFooterProps) {
   return (
     <div
       className={cn(
-        'flex items-center justify-end gap-3 pt-4 border-t border-gray-200 mt-6',
+        'flex items-center justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-700 mt-6',
         className
       )}
     >
