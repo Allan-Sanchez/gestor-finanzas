@@ -55,19 +55,90 @@ export function useTransactions(userId: string | undefined, filters?: Transactio
   });
 }
 
+// Función para detectar coincidencias con pagos mensuales
+async function detectMonthlyPaymentMatch(transaction: Transaction) {
+  const userId = transaction.user_id;
+  const transactionDate = new Date(transaction.date);
+  const dayOfMonth = transactionDate.getDate();
+  const period = transaction.date.slice(0, 7); // '2026-01'
+
+  // Solo procesar gastos
+  if (transaction.type !== 'expense') return null;
+
+  // Buscar pagos mensuales activos del usuario con misma categoría
+  const { data: monthlyPayments } = await supabase
+    .from('monthly_payments')
+    .select('*')
+    .eq('user_id', userId)
+    .eq('is_active', true)
+    .eq('category_id', transaction.category_id);
+
+  if (!monthlyPayments || monthlyPayments.length === 0) return null;
+
+  // Filtrar por coincidencia de monto y fecha
+  const matches = monthlyPayments.filter((mp) => {
+    // Monto exacto (tolerancia de ±0.01)
+    const amountMatch = Math.abs(mp.amount - transaction.amount) < 0.01;
+
+    // Fecha cercana (±5 días de tolerancia)
+    const dayDiff = Math.abs(dayOfMonth - mp.day_of_month);
+    const dateMatch = dayDiff <= 5;
+
+    return amountMatch && dateMatch;
+  });
+
+  // Solo marcar automáticamente si hay EXACTAMENTE una coincidencia
+  if (matches.length === 1) {
+    return { payment: matches[0], period };
+  }
+
+  return null;
+}
+
 export function useCreateTransaction() {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (transaction: TransactionInsert) => {
-      const { data, error } = await supabase
+      // 1. Crear la transacción
+      const { data: newTransaction, error } = await supabase
         .from('transactions')
         .insert(transaction)
         .select()
         .single();
 
       if (error) throw error;
-      return data;
+
+      // 2. Detectar si corresponde a un pago mensual
+      try {
+        const match = await detectMonthlyPaymentMatch(newTransaction);
+
+        // 3. Si hay coincidencia, marcar como pagado automáticamente
+        if (match) {
+          await supabase
+            .from('monthly_payment_tracking')
+            .upsert(
+              {
+                payment_id: match.payment.id,
+                period: match.period,
+                is_paid: true,
+                paid_date: newTransaction.date,
+                transaction_id: newTransaction.id,
+              },
+              {
+                onConflict: 'payment_id,period',
+              }
+            );
+
+          // Notificación al usuario (opcional, depende si usas toast)
+          console.log(`✓ Pago mensual "${match.payment.description}" marcado automáticamente`);
+        }
+      } catch (error) {
+        // Si falla la detección, continuar igual (no bloquear la creación)
+        console.warn('Error en detección automática:', error);
+      }
+
+      return newTransaction;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['transactions'] });
@@ -76,6 +147,8 @@ export function useCreateTransaction() {
       queryClient.invalidateQueries({ queryKey: ['monthly-summary'] });
       queryClient.invalidateQueries({ queryKey: ['category-totals'] });
       queryClient.invalidateQueries({ queryKey: ['monthly-comparison'] });
+      queryClient.invalidateQueries({ queryKey: ['monthly-payments'] }); // Invalidar también pagos mensuales
+      queryClient.invalidateQueries({ queryKey: ['payment-notifications'] }); // Y notificaciones
     },
   });
 }

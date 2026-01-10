@@ -5,6 +5,7 @@ import {
   FolderOpen,
   Wallet,
   PieChart,
+  Repeat,
   BarChart3,
   Settings,
   LogOut,
@@ -12,6 +13,7 @@ import {
 import { useAuth } from '../../hooks/useAuth';
 import { cn } from '../../utils/cn';
 import { ThemeToggle } from '../ui';
+import PaymentNotificationBell from '../notifications/PaymentNotificationBell';
 
 const navItems = [
   { path: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
@@ -19,6 +21,7 @@ const navItems = [
   { path: '/categories', icon: FolderOpen, label: 'Categorías' },
   { path: '/accounts', icon: Wallet, label: 'Cuentas' },
   { path: '/budgets', icon: PieChart, label: 'Presupuestos' },
+  { path: '/monthly-payments', icon: Repeat, label: 'Pagos Mensuales' },
   { path: '/reports', icon: BarChart3, label: 'Reportes' },
   { path: '/settings', icon: Settings, label: 'Configuración' },
 ];
@@ -30,14 +33,17 @@ export default function Sidebar() {
     <aside className="hidden md:flex md:flex-col md:w-64 bg-gray-900 dark:bg-gray-950 text-white border-r border-gray-800 dark:border-gray-900 h-screen">
       {/* Brand */}
       <div className="p-6 border-b border-gray-800 dark:border-gray-900 flex-shrink-0">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-xl">
-            💰
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-xl">
+              💰
+            </div>
+            <div>
+              <h1 className="font-bold text-lg">Gestor de Finanzas</h1>
+              <p className="text-xs text-gray-400">Control total</p>
+            </div>
           </div>
-          <div>
-            <h1 className="font-bold text-lg">Gestor de Finanzas</h1>
-            <p className="text-xs text-gray-400">Control total</p>
-          </div>
+          <PaymentNotificationBell />
         </div>
       </div>
 

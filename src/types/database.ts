@@ -187,6 +187,79 @@ export interface Database {
           created_at?: string
         }
       }
+      monthly_payments: {
+        Row: {
+          id: string
+          user_id: string
+          description: string
+          amount: number
+          day_of_month: number
+          category_id: string | null
+          account_id: string | null
+          is_active: boolean
+          notes: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          description: string
+          amount: number
+          day_of_month: number
+          category_id?: string | null
+          account_id?: string | null
+          is_active?: boolean
+          notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          description?: string
+          amount?: number
+          day_of_month?: number
+          category_id?: string | null
+          account_id?: string | null
+          is_active?: boolean
+          notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      monthly_payment_tracking: {
+        Row: {
+          id: string
+          payment_id: string
+          period: string
+          is_paid: boolean
+          paid_date: string | null
+          transaction_id: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          payment_id: string
+          period: string
+          is_paid?: boolean
+          paid_date?: string | null
+          transaction_id?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          payment_id?: string
+          period?: string
+          is_paid?: boolean
+          paid_date?: string | null
+          transaction_id?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
     }
     Views: {
       [_ in never]: never

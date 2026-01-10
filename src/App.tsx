@@ -7,6 +7,7 @@ import TransactionsPage from './pages/TransactionsPage';
 import CategoriesPage from './pages/CategoriesPage';
 import AccountsPage from './pages/AccountsPage';
 import BudgetsPage from './pages/BudgetsPage';
+import MonthlyPaymentsPage from './pages/MonthlyPaymentsPage';
 import ReportsPage from './pages/ReportsPage';
 import SettingsPage from './pages/SettingsPage';
 import MorePage from './pages/MorePage';
@@ -85,6 +86,17 @@ function App() {
               <ProtectedRoute>
                 <MainLayout>
                   <BudgetsPage />
+                </MainLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/monthly-payments"
+            element={
+              <ProtectedRoute>
+                <MainLayout>
+                  <MonthlyPaymentsPage />
                 </MainLayout>
               </ProtectedRoute>
             }
