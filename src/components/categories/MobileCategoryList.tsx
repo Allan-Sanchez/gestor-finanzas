@@ -16,8 +16,8 @@ const categoryTypeLabels = {
 };
 
 const categoryTypeColors = {
-  income: 'bg-green-100 text-green-800',
-  expense: 'bg-red-100 text-red-800',
+  income: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400',
+  expense: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400',
 };
 
 export default function MobileCategoryList({ categories, onEdit, onDelete }: MobileCategoryListProps) {
@@ -29,7 +29,7 @@ export default function MobileCategoryList({ categories, onEdit, onDelete }: Mob
       {categories.map((category) => (
         <div
           key={category.id}
-          className="bg-white rounded-lg shadow p-4 border border-gray-200"
+          className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 border border-gray-200 dark:border-gray-700"
         >
           {/* Header */}
           <div className="flex items-center gap-3 mb-3">
@@ -51,7 +51,7 @@ export default function MobileCategoryList({ categories, onEdit, onDelete }: Mob
 
           {/* Monthly Budget */}
           {category.monthly_budget !== null && category.monthly_budget > 0 && (
-            <div className="mb-3 pb-3 border-b border-gray-200">
+            <div className="mb-3 pb-3 border-b border-gray-200 dark:border-gray-700">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600 dark:text-gray-400">Presupuesto mensual</span>
                 <span className="text-base font-semibold text-gray-900 dark:text-white">
@@ -65,14 +65,14 @@ export default function MobileCategoryList({ categories, onEdit, onDelete }: Mob
           <div className="flex gap-2">
             <button
               onClick={() => onEdit(category)}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 active:bg-blue-200 transition-colors min-h-[44px]"
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/50 active:bg-blue-200 dark:active:bg-blue-900/70 transition-colors min-h-[44px]"
             >
               <Edit2 className="w-4 h-4" />
               <span className="text-sm font-medium">Editar</span>
             </button>
             <button
               onClick={() => setDeletingId(category.id)}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 active:bg-red-200 transition-colors min-h-[44px]"
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/50 active:bg-red-200 dark:active:bg-red-900/70 transition-colors min-h-[44px]"
             >
               <Trash2 className="w-4 h-4" />
               <span className="text-sm font-medium">Eliminar</span>

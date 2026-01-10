@@ -84,13 +84,13 @@ export default function AccountsPage() {
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-indigo-100 rounded-lg">
-                <Wallet className="w-8 h-8 text-indigo-600" />
+              <div className="p-3 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg">
+                <Wallet className="w-8 h-8 text-indigo-600 dark:text-indigo-400" />
               </div>
               <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Balance Total</p>
                 <p className={`text-3xl font-bold ${
-                  totalBalance >= 0 ? 'text-green-600' : 'text-red-600'
+                  totalBalance >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
                 }`}>
                   {formatCurrency(totalBalance)}
                 </p>

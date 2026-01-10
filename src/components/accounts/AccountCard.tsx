@@ -25,10 +25,10 @@ const accountTypeLabels = {
 };
 
 const accountTypeColors = {
-  cash: 'bg-green-100 text-green-800',
-  debit: 'bg-blue-100 text-blue-800',
-  credit: 'bg-purple-100 text-purple-800',
-  savings: 'bg-yellow-100 text-yellow-800',
+  cash: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400',
+  debit: 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400',
+  credit: 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-400',
+  savings: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-400',
 };
 
 export default function AccountCard({ account, onEdit, onDelete }: AccountCardProps) {
@@ -55,7 +55,7 @@ export default function AccountCard({ account, onEdit, onDelete }: AccountCardPr
           <div className="relative">
             <button
               onClick={() => setShowMenu(!showMenu)}
-              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
             >
               <MoreVertical className="w-5 h-5 text-gray-600 dark:text-gray-400" />
             </button>
@@ -66,13 +66,13 @@ export default function AccountCard({ account, onEdit, onDelete }: AccountCardPr
                   className="fixed inset-0 z-10"
                   onClick={() => setShowMenu(false)}
                 />
-                <div className="absolute right-0 mt-2 w-48 max-w-[calc(100vw-2rem)] bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-20">
+                <div className="absolute right-0 mt-2 w-48 max-w-[calc(100vw-2rem)] bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-20">
                   <button
                     onClick={() => {
                       onEdit(account);
                       setShowMenu(false);
                     }}
-                    className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 flex items-center gap-2"
+                    className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2"
                   >
                     <Edit2 className="w-4 h-4" />
                     Editar
@@ -82,7 +82,7 @@ export default function AccountCard({ account, onEdit, onDelete }: AccountCardPr
                       setShowDeleteDialog(true);
                       setShowMenu(false);
                     }}
-                    className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
+                    className="w-full px-4 py-2 text-left text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 flex items-center gap-2"
                   >
                     <Trash2 className="w-4 h-4" />
                     Eliminar
@@ -97,7 +97,7 @@ export default function AccountCard({ account, onEdit, onDelete }: AccountCardPr
           <div className="flex justify-between items-baseline">
             <span className="text-sm text-gray-600 dark:text-gray-400">Balance actual</span>
             <span className={`text-2xl font-bold ${
-              account.current_balance >= 0 ? 'text-green-600' : 'text-red-600'
+              account.current_balance >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
             }`}>
               {formatCurrency(account.current_balance)}
             </span>
@@ -115,8 +115,8 @@ export default function AccountCard({ account, onEdit, onDelete }: AccountCardPr
               <span className="text-xs text-gray-500 dark:text-gray-400">Diferencia</span>
               <span className={`text-sm font-medium ${
                 account.current_balance - account.initial_balance >= 0
-                  ? 'text-green-600'
-                  : 'text-red-600'
+                  ? 'text-green-600 dark:text-green-400'
+                  : 'text-red-600 dark:text-red-400'
               }`}>
                 {account.current_balance - account.initial_balance >= 0 ? '+' : ''}
                 {formatCurrency(account.current_balance - account.initial_balance)}

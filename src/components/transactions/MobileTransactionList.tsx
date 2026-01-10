@@ -29,26 +29,26 @@ export default function MobileTransactionList({ transactions, onEdit, onDelete }
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'income':
-        return 'bg-green-100 text-green-700';
+        return 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400';
       case 'expense':
-        return 'bg-red-100 text-red-700';
+        return 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400';
       case 'transfer':
-        return 'bg-blue-100 text-blue-700';
+        return 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400';
       default:
-        return 'bg-gray-100 text-gray-700';
+        return 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300';
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed':
-        return 'bg-green-100 text-green-700';
+        return 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400';
       case 'pending':
-        return 'bg-yellow-100 text-yellow-700';
+        return 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400';
       case 'cancelled':
-        return 'bg-red-100 text-red-700';
+        return 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400';
       default:
-        return 'bg-gray-100 text-gray-700';
+        return 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300';
     }
   };
 
@@ -101,9 +101,9 @@ export default function MobileTransactionList({ transactions, onEdit, onDelete }
             </div>
             <div className="text-right">
               <p className={`text-lg font-bold ${
-                transaction.type === 'income' ? 'text-green-600' :
-                transaction.type === 'expense' ? 'text-red-600' :
-                'text-blue-600'
+                transaction.type === 'income' ? 'text-green-600 dark:text-green-400' :
+                transaction.type === 'expense' ? 'text-red-600 dark:text-red-400' :
+                'text-blue-600 dark:text-blue-400'
               }`}>
                 {transaction.type === 'income' ? '+' : transaction.type === 'expense' ? '-' : ''}
                 Q{transaction.amount.toFixed(2)}
@@ -136,17 +136,17 @@ export default function MobileTransactionList({ transactions, onEdit, onDelete }
           </div>
 
           {/* Actions Row */}
-          <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
+          <div className="flex items-center gap-2 pt-3 border-t border-gray-100 dark:border-gray-700">
             <button
               onClick={() => onEdit(transaction)}
-              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 active:bg-blue-200 transition-colors min-h-[44px]"
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/50 active:bg-blue-200 dark:active:bg-blue-900/70 transition-colors min-h-[44px]"
             >
               <Edit className="w-4 h-4" />
               <span className="text-sm font-medium">Editar</span>
             </button>
             <button
               onClick={() => setDeletingId(transaction.id)}
-              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 active:bg-red-200 transition-colors min-h-[44px]"
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/50 active:bg-red-200 dark:active:bg-red-900/70 transition-colors min-h-[44px]"
             >
               <Trash2 className="w-4 h-4" />
               <span className="text-sm font-medium">Eliminar</span>
