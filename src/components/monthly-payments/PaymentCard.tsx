@@ -103,9 +103,16 @@ export default function PaymentCard({
         <div className="flex-1 min-w-0">
           {/* Header: Descripción y Monto */}
           <div className="flex justify-between items-start gap-2">
-            <h3 className="font-semibold text-gray-900 dark:text-white truncate">
-              {payment.description}
-            </h3>
+            <div className="flex items-center gap-2 flex-1 min-w-0">
+              <h3 className="font-semibold text-gray-900 dark:text-white truncate">
+                {payment.description}
+              </h3>
+              {!payment.is_recurring && (
+                <span className="px-2 py-0.5 text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 rounded-full whitespace-nowrap">
+                  Único
+                </span>
+              )}
+            </div>
             <span className="text-lg font-bold text-gray-900 dark:text-white whitespace-nowrap">
               Q{payment.amount.toFixed(2)}
             </span>

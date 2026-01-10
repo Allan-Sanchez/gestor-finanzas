@@ -1,4 +1,4 @@
-import { Plus, Repeat } from 'lucide-react';
+import { Plus, Repeat, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import {
@@ -20,26 +20,45 @@ export default function MonthlyPaymentsPage() {
   const [showForm, setShowForm] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState<MonthlyPaymentWithTracking | null>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [selectedMonth, setSelectedMonth] = useState(new Date().toISOString().slice(0, 7));
 
-  const { data: payments, isLoading } = useMonthlyPayments(user?.id);
+  const { data: payments, isLoading } = useMonthlyPayments(user?.id, selectedMonth);
   const createPayment = useCreateMonthlyPayment();
   const updatePayment = useUpdateMonthlyPayment();
   const deletePayment = useDeleteMonthlyPayment();
   const markAsPaid = useMarkAsPaid();
   const unmarkAsPaid = useUnmarkAsPaid();
 
-  const currentMonth = new Date().toISOString().slice(0, 7);
-  const currentMonthName = new Date().toLocaleDateString('es-GT', {
+  const selectedMonthName = new Date(selectedMonth + '-01').toLocaleDateString('es-GT', {
     month: 'long',
     year: 'numeric',
   });
 
+  // Funciones para navegar entre meses
+  const goToPreviousMonth = () => {
+    const [year, month] = selectedMonth.split('-').map(Number);
+    const prevMonth = new Date(year, month - 2, 1); // month - 2 porque los meses empiezan en 0
+    setSelectedMonth(prevMonth.toISOString().slice(0, 7));
+  };
+
+  const goToNextMonth = () => {
+    const [year, month] = selectedMonth.split('-').map(Number);
+    const nextMonth = new Date(year, month, 1); // month porque ya estamos en el siguiente
+    setSelectedMonth(nextMonth.toISOString().slice(0, 7));
+  };
+
+  const goToCurrentMonth = () => {
+    setSelectedMonth(new Date().toISOString().slice(0, 7));
+  };
+
+  const isCurrentMonth = selectedMonth === new Date().toISOString().slice(0, 7);
+
   const handleTogglePaid = async (paymentId: string, isPaid: boolean) => {
     try {
       if (isPaid) {
-        await markAsPaid.mutateAsync({ paymentId, period: currentMonth });
+        await markAsPaid.mutateAsync({ paymentId, period: selectedMonth });
       } else {
-        await unmarkAsPaid.mutateAsync({ paymentId, period: currentMonth });
+        await unmarkAsPaid.mutateAsync({ paymentId, period: selectedMonth });
       }
     } catch (error) {
       console.error('Error al actualizar estado:', error);
@@ -119,6 +138,40 @@ export default function MonthlyPaymentsPage() {
         </button>
       </div>
 
+      {/* Selector de Mes */}
+      <div className="flex items-center justify-between gap-4 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm">
+        <button
+          onClick={goToPreviousMonth}
+          className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+          title="Mes anterior"
+        >
+          <ChevronLeft className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+        </button>
+
+        <div className="flex items-center gap-3">
+          <Repeat className="w-5 h-5 text-blue-600" />
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white capitalize">
+            {selectedMonthName}
+          </h2>
+          {!isCurrentMonth && (
+            <button
+              onClick={goToCurrentMonth}
+              className="ml-2 text-sm text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              Ir a mes actual
+            </button>
+          )}
+        </div>
+
+        <button
+          onClick={goToNextMonth}
+          className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+          title="Mes siguiente"
+        >
+          <ChevronRight className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+        </button>
+      </div>
+
       {/* Summary Cards */}
       <PaymentSummary payments={payments || []} />
 
@@ -144,8 +197,8 @@ export default function MonthlyPaymentsPage() {
         </div>
       ) : (
         <div>
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            Pagos de {currentMonthName}
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 capitalize">
+            Pagos de {selectedMonthName}
           </h2>
           <div className="space-y-3">
             {payments.map((payment) => (

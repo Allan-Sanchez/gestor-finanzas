@@ -30,6 +30,8 @@ export default function PaymentForm({
     day_of_month: '1',
     category_id: '',
     account_id: '',
+    is_recurring: true,
+    specific_month: '',
     notes: '',
   });
 
@@ -44,17 +46,22 @@ export default function PaymentForm({
         day_of_month: payment.day_of_month.toString(),
         category_id: payment.category_id || '',
         account_id: payment.account_id || '',
+        is_recurring: payment.is_recurring,
+        specific_month: payment.specific_month || '',
         notes: payment.notes || '',
       });
     } else {
       // Resetear formulario para nuevo pago
       const expenseCategories = categories?.filter((c) => c.type === 'expense');
+      const currentMonth = new Date().toISOString().slice(0, 7);
       setFormData({
         description: '',
         amount: '',
         day_of_month: '1',
         category_id: expenseCategories?.[0]?.id || '',
         account_id: accounts?.[0]?.id || '',
+        is_recurring: true,
+        specific_month: currentMonth,
         notes: '',
       });
     }
@@ -82,6 +89,10 @@ export default function PaymentForm({
       newErrors.category_id = 'La categoría es requerida';
     }
 
+    if (!formData.is_recurring && !formData.specific_month) {
+      newErrors.specific_month = 'Debes seleccionar un mes para pagos únicos';
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -98,6 +109,8 @@ export default function PaymentForm({
       day_of_month: parseInt(formData.day_of_month),
       category_id: formData.category_id || null,
       account_id: formData.account_id || null,
+      is_recurring: formData.is_recurring,
+      specific_month: formData.is_recurring ? null : formData.specific_month,
       notes: formData.notes.trim() || null,
     };
 
@@ -155,6 +168,49 @@ export default function PaymentForm({
               required
             />
           </div>
+
+          {/* Tipo de pago: Recurrente o Único */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Tipo de pago
+            </label>
+            <div className="flex gap-4">
+              <label className="flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  checked={formData.is_recurring}
+                  onChange={() => setFormData({ ...formData, is_recurring: true })}
+                  className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                />
+                <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                  Recurrente (cada mes)
+                </span>
+              </label>
+              <label className="flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  checked={!formData.is_recurring}
+                  onChange={() => setFormData({ ...formData, is_recurring: false })}
+                  className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                />
+                <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                  Único (solo este mes)
+                </span>
+              </label>
+            </div>
+          </div>
+
+          {/* Selector de mes (solo para pagos únicos) */}
+          {!formData.is_recurring && (
+            <Input
+              label="Mes del pago"
+              type="month"
+              value={formData.specific_month}
+              onChange={(e) => setFormData({ ...formData, specific_month: e.target.value })}
+              error={errors.specific_month}
+              required
+            />
+          )}
 
           {/* Categoría */}
           <Select

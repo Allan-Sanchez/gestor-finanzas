@@ -7,9 +7,9 @@ import type {
   PaymentNotifications,
 } from '../types/monthly-payments';
 
-// Hook: Obtener todos los pagos con tracking del mes actual
-export function useMonthlyPayments(userId: string | undefined) {
-  const currentMonth = new Date().toISOString().slice(0, 7); // '2026-01'
+// Hook: Obtener todos los pagos con tracking de un mes específico
+export function useMonthlyPayments(userId: string | undefined, selectedMonth?: string) {
+  const currentMonth = selectedMonth || new Date().toISOString().slice(0, 7); // '2026-01'
 
   return useQuery({
     queryKey: ['monthly-payments', userId, currentMonth],
@@ -17,6 +17,7 @@ export function useMonthlyPayments(userId: string | undefined) {
       if (!userId) throw new Error('User ID required');
 
       // 1. Obtener plantillas activas con relaciones
+      // Filtrar: recurrentes O únicos del mes seleccionado
       const { data: payments, error } = await supabase
         .from('monthly_payments')
         .select(`
@@ -35,12 +36,13 @@ export function useMonthlyPayments(userId: string | undefined) {
         `)
         .eq('user_id', userId)
         .eq('is_active', true)
+        .or(`is_recurring.eq.true,specific_month.eq.${currentMonth}`)
         .order('day_of_month');
 
       if (error) throw error;
       if (!payments) return [];
 
-      // 2. Obtener tracking del mes actual
+      // 2. Obtener tracking del mes seleccionado
       const paymentIds = payments.map((p) => p.id);
 
       if (paymentIds.length === 0) return [];
@@ -221,6 +223,69 @@ export function usePaymentNotifications(userId: string | undefined) {
       });
 
       return { overdue, upcoming, total: overdue + upcoming };
+    },
+    enabled: !!userId,
+    refetchInterval: 60000, // Refetch cada minuto
+  });
+}
+
+// Hook: Obtener pagos pendientes y vencidos con detalles
+export function usePendingPayments(userId: string | undefined) {
+  const currentMonth = new Date().toISOString().slice(0, 7);
+  const currentDay = new Date().getDate();
+
+  return useQuery({
+    queryKey: ['pending-payments', userId, currentMonth],
+    queryFn: async (): Promise<MonthlyPaymentWithTracking[]> => {
+      if (!userId) throw new Error('User ID required');
+
+      // Obtener pagos con sus relaciones
+      const { data: payments } = await supabase
+        .from('monthly_payments')
+        .select(`
+          *,
+          categories (
+            id,
+            name,
+            icon,
+            color
+          ),
+          accounts (
+            id,
+            name,
+            type
+          )
+        `)
+        .eq('user_id', userId)
+        .eq('is_active', true)
+        .order('day_of_month');
+
+      if (!payments || payments.length === 0) return [];
+
+      // Obtener tracking del mes actual
+      const { data: tracking } = await supabase
+        .from('monthly_payment_tracking')
+        .select('*')
+        .eq('period', currentMonth)
+        .in('payment_id', payments.map(p => p.id));
+
+      // Combinar y filtrar solo pendientes y vencidos
+      const combined: MonthlyPaymentWithTracking[] = payments.map((payment) => ({
+        ...payment,
+        tracking: tracking?.find((t) => t.payment_id === payment.id) || null,
+      }));
+
+      // Filtrar solo los no pagados que están vencidos o próximos (7 días)
+      return combined.filter((p) => {
+        const isPaid = p.tracking?.is_paid;
+        if (isPaid) return false;
+
+        // Vencidos o próximos (dentro de 7 días)
+        if (currentDay > p.day_of_month) return true; // Vencido
+        if (p.day_of_month - currentDay <= 7) return true; // Próximo
+
+        return false;
+      });
     },
     enabled: !!userId,
     refetchInterval: 60000, // Refetch cada minuto

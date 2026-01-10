@@ -8,7 +8,8 @@ import {
   LogOut,
   RefreshCw,
   Moon,
-  Sun
+  Sun,
+  BarChart3
 } from 'lucide-react';
 import { Card, CardContent, Button } from '../components/ui';
 import { useAuth } from '../hooks/useAuth';
@@ -29,21 +30,28 @@ const menuItems: MenuItem[] = [
     icon: FolderOpen,
     label: 'Categorías',
     description: 'Organiza tus transacciones',
-    color: 'bg-purple-100 text-purple-600',
+    color: 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400',
   },
   {
     path: '/accounts',
     icon: Wallet,
     label: 'Cuentas',
     description: 'Gestiona tus cuentas bancarias',
-    color: 'bg-blue-100 text-blue-600',
+    color: 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400',
+  },
+  {
+    path: '/reports',
+    icon: BarChart3,
+    label: 'Reportes',
+    description: 'Analiza tus finanzas con gráficos',
+    color: 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400',
   },
   {
     path: '/settings',
     icon: Settings,
     label: 'Configuración',
     description: 'Ajusta tu perfil y preferencias',
-    color: 'bg-gray-100 text-gray-600',
+    color: 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400',
   },
 ];
 
@@ -206,7 +214,7 @@ export default function MorePage() {
       <Card>
         <CardContent className="p-4 text-center">
           <p className="text-xs text-gray-600 dark:text-gray-400">
-            Versión 1.0.0
+            Versión 1.1.0
           </p>
         </CardContent>
       </Card>

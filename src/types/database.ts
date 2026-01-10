@@ -197,6 +197,8 @@ export interface Database {
           category_id: string | null
           account_id: string | null
           is_active: boolean
+          is_recurring: boolean
+          specific_month: string | null
           notes: string | null
           created_at: string
           updated_at: string
@@ -210,6 +212,8 @@ export interface Database {
           category_id?: string | null
           account_id?: string | null
           is_active?: boolean
+          is_recurring?: boolean
+          specific_month?: string | null
           notes?: string | null
           created_at?: string
           updated_at?: string
@@ -223,6 +227,8 @@ export interface Database {
           category_id?: string | null
           account_id?: string | null
           is_active?: boolean
+          is_recurring?: boolean
+          specific_month?: string | null
           notes?: string | null
           created_at?: string
           updated_at?: string
