@@ -45,7 +45,7 @@ export default function AccountCard({ account, onEdit, onDelete }: AccountCardPr
               <Icon className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="font-semibold text-lg text-gray-900">{account.name}</h3>
+              <h3 className="font-semibold text-lg text-gray-900 dark:text-white">{account.name}</h3>
               <Badge variant="secondary" className={accountTypeColors[account.type]}>
                 {accountTypeLabels[account.type]}
               </Badge>
@@ -57,7 +57,7 @@ export default function AccountCard({ account, onEdit, onDelete }: AccountCardPr
               onClick={() => setShowMenu(!showMenu)}
               className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
             >
-              <MoreVertical className="w-5 h-5 text-gray-600" />
+              <MoreVertical className="w-5 h-5 text-gray-600 dark:text-gray-400" />
             </button>
 
             {showMenu && (
@@ -72,7 +72,7 @@ export default function AccountCard({ account, onEdit, onDelete }: AccountCardPr
                       onEdit(account);
                       setShowMenu(false);
                     }}
-                    className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                    className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 flex items-center gap-2"
                   >
                     <Edit2 className="w-4 h-4" />
                     Editar
@@ -95,7 +95,7 @@ export default function AccountCard({ account, onEdit, onDelete }: AccountCardPr
 
         <div className="mt-6 space-y-2">
           <div className="flex justify-between items-baseline">
-            <span className="text-sm text-gray-600">Balance actual</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">Balance actual</span>
             <span className={`text-2xl font-bold ${
               account.current_balance >= 0 ? 'text-green-600' : 'text-red-600'
             }`}>
@@ -104,15 +104,15 @@ export default function AccountCard({ account, onEdit, onDelete }: AccountCardPr
           </div>
 
           <div className="flex justify-between items-baseline">
-            <span className="text-xs text-gray-500">Balance inicial</span>
-            <span className="text-sm text-gray-600">
+            <span className="text-xs text-gray-500 dark:text-gray-400">Balance inicial</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">
               {formatCurrency(account.initial_balance)}
             </span>
           </div>
 
           {account.current_balance !== account.initial_balance && (
             <div className="flex justify-between items-baseline">
-              <span className="text-xs text-gray-500">Diferencia</span>
+              <span className="text-xs text-gray-500 dark:text-gray-400">Diferencia</span>
               <span className={`text-sm font-medium ${
                 account.current_balance - account.initial_balance >= 0
                   ? 'text-green-600'

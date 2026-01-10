@@ -18,7 +18,7 @@ export default function ReportsPage() {
   if (transactionsLoading || accountsLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="text-gray-500">Cargando reportes...</div>
+        <div className="text-gray-500 dark:text-gray-400">Cargando reportes...</div>
       </div>
     );
   }
@@ -35,8 +35,8 @@ export default function ReportsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Reportes</h1>
-          <p className="text-gray-600 mt-1">Análisis detallados de tus finanzas</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Reportes</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">Análisis detallados de tus finanzas</p>
         </div>
         <button
           onClick={() => window.print()}
@@ -48,8 +48,8 @@ export default function ReportsPage() {
       </div>
 
       {/* Tabs Navigation */}
-      <div className="bg-white rounded-lg shadow">
-        <div className="border-b border-gray-200">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow">
+        <div className="border-b border-gray-200 dark:border-gray-700">
           <nav className="flex -mb-px overflow-x-auto">
             {tabs.map((tab) => {
               const Icon = tab.icon;

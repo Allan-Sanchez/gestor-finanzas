@@ -38,7 +38,7 @@ export default function ForgotPasswordForm({ onSwitchToLogin }: ForgotPasswordFo
     return (
       <div className="text-center space-y-4">
         <div className="text-blue-600 text-5xl mb-4">📧</div>
-        <h2 className="text-2xl font-bold text-gray-900">Revisa tu correo</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Revisa tu correo</h2>
         <p className="text-gray-600">
           Te hemos enviado un enlace para restablecer tu contraseña a <strong>{email}</strong>
         </p>
@@ -52,7 +52,7 @@ export default function ForgotPasswordForm({ onSwitchToLogin }: ForgotPasswordFo
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">Recuperar Contraseña</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Recuperar Contraseña</h2>
         <p className="text-gray-600 mt-2">
           Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña
         </p>

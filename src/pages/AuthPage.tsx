@@ -17,7 +17,7 @@ export default function AuthPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-4">
               <span className="text-3xl">💰</span>
             </div>
-            <h1 className="text-3xl font-bold text-gray-900">Gestor de Finanzas</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Gestor de Finanzas</h1>
           </div>
 
           {/* Forms */}

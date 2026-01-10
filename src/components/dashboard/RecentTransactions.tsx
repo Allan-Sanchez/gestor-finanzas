@@ -40,13 +40,13 @@ export default function RecentTransactions({ transactions, limit = 5 }: RecentTr
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'income':
-        return 'text-green-600 bg-green-50';
+        return 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30';
       case 'expense':
-        return 'text-red-600 bg-red-50';
+        return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30';
       case 'transfer':
-        return 'text-blue-600 bg-blue-50';
+        return 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30';
       default:
-        return 'text-gray-600 bg-gray-50';
+        return 'text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-700';
     }
   };
 
@@ -65,9 +65,9 @@ export default function RecentTransactions({ transactions, limit = 5 }: RecentTr
 
   if (recentTransactions.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow p-4 sm:p-6">
-        <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">Transacciones Recientes</h3>
-        <div className="text-center py-8 sm:py-12 text-gray-500">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-4 sm:mb-6">Transacciones Recientes</h3>
+        <div className="text-center py-8 sm:py-12 text-gray-500 dark:text-gray-400">
           <p className="text-sm">No hay transacciones registradas</p>
         </div>
       </div>
@@ -75,12 +75,12 @@ export default function RecentTransactions({ transactions, limit = 5 }: RecentTr
   }
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
       <div className="flex items-center justify-between mb-4 sm:mb-6">
-        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Transacciones Recientes</h3>
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">Transacciones Recientes</h3>
         <Link
           to="/transactions"
-          className="text-xs sm:text-sm text-blue-600 hover:text-blue-700 flex items-center gap-1"
+          className="text-xs sm:text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 flex items-center gap-1"
         >
           Ver todas
           <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -91,7 +91,7 @@ export default function RecentTransactions({ transactions, limit = 5 }: RecentTr
         {recentTransactions.map((transaction) => (
           <div
             key={transaction.id}
-            className="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors"
+            className="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors"
           >
             {/* Left side: Icon, Category/Type, Date */}
             <div className="flex items-center gap-2 sm:gap-3 flex-1">
@@ -103,15 +103,15 @@ export default function RecentTransactions({ transactions, limit = 5 }: RecentTr
                 )}
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-medium text-gray-900 truncate">
+                <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
                   {transaction.description}
                 </p>
                 <div className="flex items-center gap-2 mt-0.5">
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
                     {transaction.categories?.name || getTypeLabel(transaction.type)}
                   </span>
-                  <span className="text-xs text-gray-400">•</span>
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-gray-400 dark:text-gray-600">•</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
                     {new Date(transaction.date).toLocaleDateString('es-GT', {
                       day: 'numeric',
                       month: 'short'
@@ -124,14 +124,14 @@ export default function RecentTransactions({ transactions, limit = 5 }: RecentTr
             {/* Right side: Amount */}
             <div className="text-right ml-3">
               <p className={`text-sm font-semibold ${
-                transaction.type === 'income' ? 'text-green-600' :
-                transaction.type === 'expense' ? 'text-red-600' :
-                'text-blue-600'
+                transaction.type === 'income' ? 'text-green-600 dark:text-green-400' :
+                transaction.type === 'expense' ? 'text-red-600 dark:text-red-400' :
+                'text-blue-600 dark:text-blue-400'
               }`}>
                 {transaction.type === 'income' ? '+' : transaction.type === 'expense' ? '-' : ''}
                 Q{transaction.amount.toFixed(2)}
               </p>
-              <p className="text-xs text-gray-500 mt-0.5">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
                 {transaction.accounts.name}
               </p>
             </div>

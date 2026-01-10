@@ -45,7 +45,7 @@ export default function PWAUpdatePrompt() {
             <RefreshCw className="w-5 h-5 text-blue-600" />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="text-sm font-semibold text-gray-900 mb-1">
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
               {needRefresh ? 'Nueva versión disponible' : 'App lista para trabajar sin conexión'}
             </h3>
             <p className="text-xs text-gray-600 mb-3">

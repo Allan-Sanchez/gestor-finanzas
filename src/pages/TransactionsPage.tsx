@@ -81,8 +81,8 @@ export default function TransactionsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Transacciones</h1>
-          <p className="text-gray-600 mt-1">Gestiona tus ingresos y gastos</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Transacciones</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">Gestiona tus ingresos y gastos</p>
         </div>
         <Button onClick={handleNewTransaction} disabled={accounts.length === 0}>
           <Plus className="w-5 h-5 mr-2" />
@@ -94,7 +94,7 @@ export default function TransactionsPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card>
           <CardContent className="p-6">
-            <p className="text-sm text-gray-600 mb-1">Ingresos</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Ingresos</p>
             <p className="text-2xl font-bold text-green-600">
               Q{totalIncome.toFixed(2)}
             </p>
@@ -103,7 +103,7 @@ export default function TransactionsPage() {
 
         <Card>
           <CardContent className="p-6">
-            <p className="text-sm text-gray-600 mb-1">Egresos</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Egresos</p>
             <p className="text-2xl font-bold text-red-600">
               Q{totalExpense.toFixed(2)}
             </p>
@@ -112,7 +112,7 @@ export default function TransactionsPage() {
 
         <Card>
           <CardContent className="p-6">
-            <p className="text-sm text-gray-600 mb-1">Balance</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Balance</p>
             <p className={`text-2xl font-bold ${balance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
               Q{balance.toFixed(2)}
             </p>
@@ -133,10 +133,10 @@ export default function TransactionsPage() {
         <Card>
           <CardContent className="text-center py-12">
             <Receipt className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
               Crea una cuenta primero
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
               Necesitas crear al menos una cuenta antes de registrar transacciones
             </p>
           </CardContent>
@@ -153,29 +153,29 @@ export default function TransactionsPage() {
             <CardContent className="p-0">
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-50 border-b border-gray-200">
+                  <thead className="bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-700">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                         Fecha
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                         Descripción
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                         Cuenta
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                         Monto
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                         Estado
                       </th>
-                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                         Acciones
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200">
                     {transactions.map((transaction) => (
                       <TransactionRow
                         key={transaction.id}
@@ -194,10 +194,10 @@ export default function TransactionsPage() {
         <Card>
           <CardContent className="text-center py-12">
             <Receipt className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
               No hay transacciones
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
               Comienza registrando tu primera transacción
             </p>
             <Button onClick={handleNewTransaction}>

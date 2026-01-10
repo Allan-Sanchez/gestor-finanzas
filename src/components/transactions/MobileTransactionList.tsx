@@ -67,8 +67,8 @@ export default function MobileTransactionList({ transactions, onEdit, onDelete }
 
   if (transactions.length === 0) {
     return (
-      <div className="text-center py-12 bg-white rounded-lg">
-        <p className="text-gray-500">No hay transacciones para mostrar</p>
+      <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg">
+        <p className="text-gray-500 dark:text-gray-400">No hay transacciones para mostrar</p>
       </div>
     );
   }
@@ -78,7 +78,7 @@ export default function MobileTransactionList({ transactions, onEdit, onDelete }
       {transactions.map((transaction) => (
         <div
           key={transaction.id}
-          className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm active:shadow-md transition-shadow"
+          className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 shadow-sm active:shadow-md transition-shadow"
         >
           {/* Header Row */}
           <div className="flex items-start justify-between mb-3">
@@ -91,10 +91,10 @@ export default function MobileTransactionList({ transactions, onEdit, onDelete }
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-gray-900 truncate">
+                <h3 className="font-semibold text-gray-900 dark:text-white truncate">
                   {transaction.description}
                 </h3>
-                <p className="text-sm text-gray-500 truncate">
+                <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
                   {transaction.categories?.name || 'Sin categoría'}
                 </p>
               </div>
@@ -115,8 +115,8 @@ export default function MobileTransactionList({ transactions, onEdit, onDelete }
           <div className="flex items-center justify-between text-sm mb-3">
             <div className="flex items-center gap-4">
               <div>
-                <span className="text-gray-500">Fecha:</span>
-                <span className="ml-1 text-gray-900">
+                <span className="text-gray-500 dark:text-gray-400">Fecha:</span>
+                <span className="ml-1 text-gray-900 dark:text-white">
                   {new Date(transaction.date).toLocaleDateString('es-GT', {
                     day: '2-digit',
                     month: 'short'
@@ -124,8 +124,8 @@ export default function MobileTransactionList({ transactions, onEdit, onDelete }
                 </span>
               </div>
               <div>
-                <span className="text-gray-500">Cuenta:</span>
-                <span className="ml-1 text-gray-900 truncate max-w-[120px] inline-block align-bottom">
+                <span className="text-gray-500 dark:text-gray-400">Cuenta:</span>
+                <span className="ml-1 text-gray-900 dark:text-white truncate max-w-[120px] inline-block align-bottom">
                   {transaction.accounts.name}
                 </span>
               </div>

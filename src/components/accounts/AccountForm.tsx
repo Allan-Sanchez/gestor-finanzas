@@ -103,7 +103,7 @@ export default function AccountForm({
     >
       <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Nombre de la cuenta *
             </label>
             <Input
@@ -117,7 +117,7 @@ export default function AccountForm({
           </div>
 
           <div>
-            <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="type" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Tipo de cuenta *
             </label>
             <Select
@@ -137,7 +137,7 @@ export default function AccountForm({
             <div>
               <label
                 htmlFor="initial_balance"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
               >
                 Balance inicial *
               </label>
@@ -152,7 +152,7 @@ export default function AccountForm({
                 placeholder="0.00"
                 error={errors.initial_balance}
               />
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                 El balance actual se establecerá con este valor inicial
               </p>
             </div>

@@ -40,9 +40,9 @@ export default function TransactionRow({ transaction, onEdit, onDelete }: Transa
   const Icon = transactionTypeIcons[transaction.type];
 
   return (
-    <tr className="hover:bg-gray-50 transition-colors">
+    <tr className="hover:bg-gray-50 dark:bg-gray-700 transition-colors">
       {/* Date */}
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
         {formatDate(transaction.date)}
       </td>
 
@@ -53,13 +53,13 @@ export default function TransactionRow({ transaction, onEdit, onDelete }: Transa
             <Icon className={`w-5 h-5 ${transactionTypeColors[transaction.type]}`} />
           </div>
           <div>
-            <p className="text-sm font-medium text-gray-900">{transaction.description}</p>
+            <p className="text-sm font-medium text-gray-900 dark:text-white">{transaction.description}</p>
             {transaction.categories && (
               <div className="flex items-center gap-2 mt-1">
                 <span className="text-xs" style={{ color: transaction.categories.color || '#6B7280' }}>
                   {transaction.categories.icon}
                 </span>
-                <span className="text-xs text-gray-600">{transaction.categories.name}</span>
+                <span className="text-xs text-gray-600 dark:text-gray-400">{transaction.categories.name}</span>
               </div>
             )}
           </div>
@@ -67,7 +67,7 @@ export default function TransactionRow({ transaction, onEdit, onDelete }: Transa
       </td>
 
       {/* Account */}
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
         {transaction.accounts.name}
       </td>
 
@@ -90,9 +90,9 @@ export default function TransactionRow({ transaction, onEdit, onDelete }: Transa
       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium relative">
         <button
           onClick={() => setShowMenu(!showMenu)}
-          className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          className="p-2 hover:bg-gray-100 dark:bg-gray-700 rounded-lg transition-colors"
         >
-          <MoreVertical className="w-5 h-5 text-gray-600" />
+          <MoreVertical className="w-5 h-5 text-gray-600 dark:text-gray-400" />
         </button>
 
         {showMenu && (
@@ -101,13 +101,13 @@ export default function TransactionRow({ transaction, onEdit, onDelete }: Transa
               className="fixed inset-0 z-10"
               onClick={() => setShowMenu(false)}
             />
-            <div className="absolute right-0 mt-2 w-48 max-w-[calc(100vw-2rem)] bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-20">
+            <div className="absolute right-0 mt-2 w-48 max-w-[calc(100vw-2rem)] bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-20">
               <button
                 onClick={() => {
                   onEdit(transaction);
                   setShowMenu(false);
                 }}
-                className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:bg-gray-700 flex items-center gap-2"
               >
                 <Edit2 className="w-4 h-4" />
                 Editar

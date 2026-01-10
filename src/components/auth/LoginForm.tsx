@@ -39,7 +39,7 @@ export default function LoginForm({ onSwitchToRegister, onSwitchToForgotPassword
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">Iniciar Sesión</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Iniciar Sesión</h2>
         <p className="text-gray-600 mt-2">Accede a tu cuenta de Gestor de Finanzas</p>
       </div>
 

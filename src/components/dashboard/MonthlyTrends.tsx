@@ -60,8 +60,8 @@ export default function MonthlyTrends({ transactions }: MonthlyTrendsProps) {
   }, [monthlyData]);
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
-      <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
+      <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-4 sm:mb-6">
         Tendencias de los Últimos {isMobile ? '3' : '6'} Meses
       </h3>
 
@@ -69,37 +69,37 @@ export default function MonthlyTrends({ transactions }: MonthlyTrendsProps) {
         {monthlyData.map((data, index) => (
           <div key={index}>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-700 capitalize w-16">
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 capitalize w-16">
                 {data.month}
               </span>
               <div className="flex-1 mx-4 space-y-1">
                 {/* Income bar */}
                 <div className="flex items-center gap-2">
-                  <div className="flex-1 bg-gray-100 rounded-full h-3">
+                  <div className="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full h-3">
                     <div
                       className="bg-green-500 h-3 rounded-full transition-all"
                       style={{ width: `${(data.income / maxValue) * 100}%` }}
                     />
                   </div>
-                  <span className="text-xs text-gray-600 w-24 text-right">
+                  <span className="text-xs text-gray-600 dark:text-gray-400 w-24 text-right">
                     Q{data.income.toFixed(0)}
                   </span>
                 </div>
                 {/* Expense bar */}
                 <div className="flex items-center gap-2">
-                  <div className="flex-1 bg-gray-100 rounded-full h-3">
+                  <div className="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full h-3">
                     <div
                       className="bg-red-500 h-3 rounded-full transition-all"
                       style={{ width: `${(data.expense / maxValue) * 100}%` }}
                     />
                   </div>
-                  <span className="text-xs text-gray-600 w-24 text-right">
+                  <span className="text-xs text-gray-600 dark:text-gray-400 w-24 text-right">
                     Q{data.expense.toFixed(0)}
                   </span>
                 </div>
               </div>
               <div className={`text-sm font-semibold w-24 text-right ${
-                data.balance >= 0 ? 'text-blue-600' : 'text-orange-600'
+                data.balance >= 0 ? 'text-blue-600 dark:text-blue-400' : 'text-orange-600 dark:text-orange-400'
               }`}>
                 {data.balance >= 0 ? '+' : ''}Q{data.balance.toFixed(0)}
               </div>
@@ -109,18 +109,18 @@ export default function MonthlyTrends({ transactions }: MonthlyTrendsProps) {
       </div>
 
       {/* Legend */}
-      <div className="flex items-center justify-center gap-3 sm:gap-6 mt-4 sm:mt-6 pt-4 border-t">
+      <div className="flex items-center justify-center gap-3 sm:gap-6 mt-4 sm:mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
         <div className="flex items-center gap-1 sm:gap-2">
           <div className="w-3 h-3 bg-green-500 rounded-full" />
-          <span className="text-xs sm:text-sm text-gray-600">Ingresos</span>
+          <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Ingresos</span>
         </div>
         <div className="flex items-center gap-1 sm:gap-2">
           <div className="w-3 h-3 bg-red-500 rounded-full" />
-          <span className="text-xs sm:text-sm text-gray-600">Gastos</span>
+          <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Gastos</span>
         </div>
         <div className="flex items-center gap-1 sm:gap-2">
           <div className="w-3 h-3 bg-blue-600 rounded-full" />
-          <span className="text-xs sm:text-sm text-gray-600">Balance</span>
+          <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Balance</span>
         </div>
       </div>
     </div>

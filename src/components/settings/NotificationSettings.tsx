@@ -85,20 +85,20 @@ export default function NotificationSettings() {
   ];
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
       <div className="flex items-center gap-2 mb-4 sm:mb-6">
-        <Bell className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
-        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Notificaciones</h3>
+        <Bell className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 dark:text-gray-300" />
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">Notificaciones</h3>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
         {/* Notification Options */}
         <div className="space-y-3 sm:space-y-4">
           {notificationOptions.map((option) => (
-            <div key={option.key} className="flex items-start justify-between p-4 bg-gray-50 rounded-lg">
+            <div key={option.key} className="flex items-start justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
               <div className="flex-1">
-                <h4 className="text-sm font-medium text-gray-900">{option.title}</h4>
-                <p className="text-sm text-gray-600 mt-1">{option.description}</p>
+                <h4 className="text-sm font-medium text-gray-900 dark:text-white">{option.title}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{option.description}</p>
               </div>
               <button
                 type="button"

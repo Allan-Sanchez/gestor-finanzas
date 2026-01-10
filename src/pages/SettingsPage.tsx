@@ -8,8 +8,8 @@ export default function SettingsPage() {
     <div className="space-y-4 sm:space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Configuración</h1>
-        <p className="text-sm sm:text-base text-gray-600 mt-1">Personaliza tu experiencia y gestiona tus datos</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Configuración</h1>
+        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-1">Personaliza tu experiencia y gestiona tus datos</p>
       </div>
 
       {/* Settings Grid */}

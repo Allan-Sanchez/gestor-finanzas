@@ -92,10 +92,10 @@ export default function MonthlyComparisonReport({ transactions }: MonthlyCompari
   );
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Comparativa Mensual (Últimos 12 Meses)</h3>
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">Comparativa Mensual (Últimos 12 Meses)</h3>
         <Calendar className="w-5 h-5 text-gray-400" />
       </div>
 
@@ -178,7 +178,7 @@ export default function MonthlyComparisonReport({ transactions }: MonthlyCompari
 
                 {/* Month label */}
                 <div className="mt-2 text-center">
-                  <p className="text-xs font-medium text-gray-700 capitalize">
+                  <p className="text-xs font-medium text-gray-700 dark:text-gray-300 capitalize">
                     {month.monthShort}
                   </p>
                   {month.hasData && (
@@ -199,15 +199,15 @@ export default function MonthlyComparisonReport({ transactions }: MonthlyCompari
       <div className="flex items-center justify-center gap-6 mt-6 pt-4 border-t">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 bg-green-500 rounded" />
-          <span className="text-sm text-gray-600">Ingresos</span>
+          <span className="text-sm text-gray-600 dark:text-gray-400">Ingresos</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 bg-red-500 rounded" />
-          <span className="text-sm text-gray-600">Gastos</span>
+          <span className="text-sm text-gray-600 dark:text-gray-400">Gastos</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 bg-blue-600 rounded" />
-          <span className="text-sm text-gray-600">Balance</span>
+          <span className="text-sm text-gray-600 dark:text-gray-400">Balance</span>
         </div>
       </div>
     </div>

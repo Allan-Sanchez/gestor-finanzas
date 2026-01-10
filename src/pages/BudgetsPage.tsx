@@ -96,7 +96,7 @@ export default function BudgetsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="text-gray-500">Cargando presupuestos...</div>
+        <div className="text-gray-500 dark:text-gray-400">Cargando presupuestos...</div>
       </div>
     );
   }
@@ -106,8 +106,8 @@ export default function BudgetsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Presupuestos</h1>
-          <p className="text-gray-600 mt-1">Define y monitorea tus presupuestos mensuales</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Presupuestos</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">Define y monitorea tus presupuestos mensuales</p>
         </div>
         <button
           onClick={() => setShowForm(true)}
@@ -121,29 +121,29 @@ export default function BudgetsPage() {
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Total Budgeted */}
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium text-gray-600">Presupuestado</span>
+            <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Presupuestado</span>
             <DollarSign className="w-5 h-5 text-blue-600" />
           </div>
-          <p className="text-2xl font-bold text-gray-900">
+          <p className="text-2xl font-bold text-gray-900 dark:text-white">
             Q{summary.totalBudgeted.toFixed(2)}
           </p>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
             {currentMonthBudgets.length} {currentMonthBudgets.length === 1 ? 'presupuesto' : 'presupuestos'}
           </p>
         </div>
 
         {/* Total Spent */}
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium text-gray-600">Gastado</span>
+            <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Gastado</span>
             <TrendingUp className="w-5 h-5 text-purple-600" />
           </div>
-          <p className="text-2xl font-bold text-gray-900">
+          <p className="text-2xl font-bold text-gray-900 dark:text-white">
             Q{summary.totalSpent.toFixed(2)}
           </p>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
             {summary.totalBudgeted > 0
               ? `${((summary.totalSpent / summary.totalBudgeted) * 100).toFixed(1)}% del total`
               : 'Sin presupuestos'
@@ -152,15 +152,15 @@ export default function BudgetsPage() {
         </div>
 
         {/* Current Month */}
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium text-gray-600">Mes Actual</span>
+            <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Mes Actual</span>
             <Calendar className="w-5 h-5 text-green-600" />
           </div>
-          <p className="text-2xl font-bold text-gray-900">
+          <p className="text-2xl font-bold text-gray-900 dark:text-white">
             {new Date().toLocaleDateString('es-GT', { month: 'long', year: 'numeric' })}
           </p>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
             {summary.overBudgetCount > 0
               ? `${summary.overBudgetCount} sobre presupuesto`
               : 'Todo en orden'
@@ -171,14 +171,14 @@ export default function BudgetsPage() {
 
       {/* Budgets List */}
       {budgetsWithSpent.length === 0 ? (
-        <div className="bg-white rounded-lg shadow p-12 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-12 text-center">
           <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <DollarSign className="w-8 h-8 text-blue-600" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
             No hay presupuestos definidos
           </h3>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             Comienza creando un presupuesto para el mes actual
           </p>
           <button
@@ -191,7 +191,7 @@ export default function BudgetsPage() {
         </div>
       ) : (
         <div>
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
             Presupuestos de {new Date().toLocaleDateString('es-GT', { month: 'long', year: 'numeric' })}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -126,7 +126,7 @@ export default function CategoryForm({
     >
       <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Nombre de la categoría *
             </label>
             <Input
@@ -140,7 +140,7 @@ export default function CategoryForm({
           </div>
 
           <div>
-            <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="type" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Tipo de categoría *
             </label>
             <Select
@@ -157,7 +157,7 @@ export default function CategoryForm({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Icono
             </label>
             <div className="grid grid-cols-8 gap-2">
@@ -186,7 +186,7 @@ export default function CategoryForm({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Color
             </label>
             <div className="grid grid-cols-9 gap-2">
@@ -214,7 +214,7 @@ export default function CategoryForm({
             <div>
               <label
                 htmlFor="monthly_budget"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
               >
                 Presupuesto mensual (opcional)
               </label>
@@ -229,7 +229,7 @@ export default function CategoryForm({
                 placeholder="0.00"
                 error={errors.monthly_budget}
               />
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                 Define un límite mensual para esta categoría de gasto
               </p>
             </div>
@@ -237,14 +237,14 @@ export default function CategoryForm({
 
           {/* Preview */}
           <div className="bg-gray-50 rounded-lg p-4">
-            <p className="text-xs font-medium text-gray-600 mb-2">Vista previa:</p>
+            <p className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Vista previa:</p>
             <div
               className="w-12 h-12 rounded-lg flex items-center justify-center text-2xl mx-auto"
               style={{ backgroundColor: formData.color }}
             >
               {formData.icon}
             </div>
-            <p className="text-center mt-2 font-medium text-gray-900">{formData.name || 'Nombre'}</p>
+            <p className="text-center mt-2 font-medium text-gray-900 dark:text-white">{formData.name || 'Nombre'}</p>
           </div>
 
           {/* Actions */}

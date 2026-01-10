@@ -63,16 +63,16 @@ export default function CurrencySettings() {
   const selectedCurrencyData = currencies.find(c => c.code === selectedCurrency);
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
       <div className="flex items-center gap-2 mb-4 sm:mb-6">
-        <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
-        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Moneda Preferida</h3>
+        <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 dark:text-gray-300" />
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">Moneda Preferida</h3>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
         {/* Currency Selector */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Selecciona tu moneda
           </label>
           <select
@@ -86,7 +86,7 @@ export default function CurrencySettings() {
               </option>
             ))}
           </select>
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
             Esta moneda se usará para mostrar todos los valores en la aplicación
           </p>
         </div>

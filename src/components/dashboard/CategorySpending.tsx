@@ -70,9 +70,9 @@ export default function CategorySpending({ transactions }: CategorySpendingProps
 
   if (categoryData.data.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow p-4 sm:p-6">
-        <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">Gastos por Categoría</h3>
-        <div className="text-center py-8 sm:py-12 text-gray-500">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-4 sm:mb-6">Gastos por Categoría</h3>
+        <div className="text-center py-8 sm:py-12 text-gray-500 dark:text-gray-400">
           <p className="text-sm">No hay gastos registrados este mes</p>
         </div>
       </div>
@@ -80,10 +80,10 @@ export default function CategorySpending({ transactions }: CategorySpendingProps
   }
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
       <div className="flex items-center justify-between mb-4 sm:mb-6">
-        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Gastos por Categoría</h3>
-        <span className="text-xs sm:text-sm text-gray-500">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">Gastos por Categoría</h3>
+        <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
           Total: Q{categoryData.total.toFixed(2)}
         </span>
       </div>
@@ -99,20 +99,20 @@ export default function CategorySpending({ transactions }: CategorySpendingProps
                 >
                   {category.icon}
                 </div>
-                <span className="text-sm font-medium text-gray-700">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   {category.name}
                 </span>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-gray-500 dark:text-gray-400">
                   {category.percentage.toFixed(1)}%
                 </span>
-                <span className="text-sm font-semibold text-gray-900 w-24 text-right">
+                <span className="text-sm font-semibold text-gray-900 dark:text-white w-24 text-right">
                   Q{category.amount.toFixed(2)}
                 </span>
               </div>
             </div>
-            <div className="w-full bg-gray-100 rounded-full h-2">
+            <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
               <div
                 className="h-2 rounded-full transition-all"
                 style={{
@@ -127,7 +127,7 @@ export default function CategorySpending({ transactions }: CategorySpendingProps
 
       {/* Show if there are more categories */}
       {categoryData.data.length >= categoryData.limit && (
-        <p className="text-xs text-gray-500 text-center mt-4">
+        <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-4">
           Mostrando las {categoryData.limit} categorías principales
         </p>
       )}

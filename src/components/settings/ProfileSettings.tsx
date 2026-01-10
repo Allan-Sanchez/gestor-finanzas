@@ -55,16 +55,16 @@ export default function ProfileSettings() {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
       <div className="flex items-center gap-2 mb-4 sm:mb-6">
-        <User className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
-        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Perfil de Usuario</h3>
+        <User className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 dark:text-gray-300" />
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">Perfil de Usuario</h3>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
         {/* Email (read-only) */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Email
           </label>
           <div className="relative">
@@ -73,15 +73,15 @@ export default function ProfileSettings() {
               type="email"
               value={user?.email || ''}
               disabled
-              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-600 cursor-not-allowed"
+              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400 cursor-not-allowed"
             />
           </div>
-          <p className="text-xs text-gray-500 mt-1">El email no puede ser modificado</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">El email no puede ser modificado</p>
         </div>
 
         {/* Full Name */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Nombre Completo
           </label>
           <input
@@ -95,7 +95,7 @@ export default function ProfileSettings() {
 
         {/* Avatar URL */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             URL de Avatar
           </label>
           <input
@@ -105,25 +105,25 @@ export default function ProfileSettings() {
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="https://ejemplo.com/avatar.jpg"
           />
-          <p className="text-xs text-gray-500 mt-1">URL de tu imagen de perfil</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">URL de tu imagen de perfil</p>
         </div>
 
         {/* Avatar Preview */}
         {formData.avatar_url && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Vista previa
             </label>
             <div className="flex items-center gap-3">
               <img
                 src={formData.avatar_url}
                 alt="Avatar preview"
-                className="w-16 h-16 rounded-full object-cover border-2 border-gray-200"
+                className="w-16 h-16 rounded-full object-cover border-2 border-gray-200 dark:border-gray-700"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = 'https://via.placeholder.com/64';
                 }}
               />
-              <span className="text-sm text-gray-600">{formData.full_name || 'Sin nombre'}</span>
+              <span className="text-sm text-gray-600 dark:text-gray-400">{formData.full_name || 'Sin nombre'}</span>
             </div>
           </div>
         )}

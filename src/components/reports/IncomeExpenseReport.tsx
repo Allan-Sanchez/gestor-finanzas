@@ -70,10 +70,10 @@ export default function IncomeExpenseReport({ transactions }: IncomeExpenseRepor
   );
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
-        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Reporte de Ingresos vs Gastos</h3>
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">Reporte de Ingresos vs Gastos</h3>
         <div className="flex items-center gap-2">
           <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
           <select
@@ -126,35 +126,35 @@ export default function IncomeExpenseReport({ transactions }: IncomeExpenseRepor
 
       {/* Monthly Breakdown */}
       <div className="space-y-3">
-        <h4 className="text-sm font-semibold text-gray-700 mb-3">Desglose Mensual</h4>
+        <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Desglose Mensual</h4>
         {monthlyData.map((data, index) => (
           <div key={index} className={`${data.hasData ? '' : 'opacity-40'}`}>
             <div className="flex items-center justify-between mb-1">
-              <span className="text-sm font-medium text-gray-700 capitalize w-20">
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 capitalize w-20">
                 {data.monthFull}
               </span>
               <div className="flex-1 mx-4 space-y-1">
                 {/* Income bar */}
                 <div className="flex items-center gap-2">
-                  <div className="flex-1 bg-gray-100 rounded-full h-2.5">
+                  <div className="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full h-2.5">
                     <div
                       className="bg-green-500 h-2.5 rounded-full transition-all"
                       style={{ width: `${(data.income / maxValue) * 100}%` }}
                     />
                   </div>
-                  <span className="text-xs text-gray-600 w-28 text-right">
+                  <span className="text-xs text-gray-600 dark:text-gray-400 w-28 text-right">
                     Q{data.income.toFixed(2)}
                   </span>
                 </div>
                 {/* Expense bar */}
                 <div className="flex items-center gap-2">
-                  <div className="flex-1 bg-gray-100 rounded-full h-2.5">
+                  <div className="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full h-2.5">
                     <div
                       className="bg-red-500 h-2.5 rounded-full transition-all"
                       style={{ width: `${(data.expense / maxValue) * 100}%` }}
                     />
                   </div>
-                  <span className="text-xs text-gray-600 w-28 text-right">
+                  <span className="text-xs text-gray-600 dark:text-gray-400 w-28 text-right">
                     Q{data.expense.toFixed(2)}
                   </span>
                 </div>
@@ -173,15 +173,15 @@ export default function IncomeExpenseReport({ transactions }: IncomeExpenseRepor
       <div className="flex items-center justify-center gap-3 sm:gap-6 mt-4 sm:mt-6 pt-4 border-t">
         <div className="flex items-center gap-1 sm:gap-2">
           <div className="w-3 h-3 bg-green-500 rounded-full" />
-          <span className="text-xs sm:text-sm text-gray-600">Ingresos</span>
+          <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Ingresos</span>
         </div>
         <div className="flex items-center gap-1 sm:gap-2">
           <div className="w-3 h-3 bg-red-500 rounded-full" />
-          <span className="text-xs sm:text-sm text-gray-600">Gastos</span>
+          <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Gastos</span>
         </div>
         <div className="flex items-center gap-1 sm:gap-2">
           <div className="w-3 h-3 bg-blue-600 rounded-full" />
-          <span className="text-xs sm:text-sm text-gray-600">Balance</span>
+          <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Balance</span>
         </div>
       </div>
     </div>

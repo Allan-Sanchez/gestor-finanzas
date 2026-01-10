@@ -80,13 +80,13 @@ export default function CategoryReport({ transactions }: CategoryReportProps) {
   }, [transactions, selectedMonth, selectedType]);
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
-        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Reporte por Categorías</h3>
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">Reporte por Categorías</h3>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
           {/* Type selector */}
-          <div className="flex bg-gray-100 rounded-lg p-1">
+          <div className="flex bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
             <button
               onClick={() => setSelectedType('expense')}
               className={`flex-1 sm:flex-none px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors ${
@@ -148,7 +148,7 @@ export default function CategoryReport({ transactions }: CategoryReportProps) {
             }`}>
               Q{categoryData.total.toFixed(2)}
             </p>
-            <p className="text-xs text-gray-600 mt-0.5">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">
               {categoryData.categories.length} {categoryData.categories.length === 1 ? 'categoría' : 'categorías'}
             </p>
           </div>
@@ -157,7 +157,7 @@ export default function CategoryReport({ transactions }: CategoryReportProps) {
 
       {/* Categories List */}
       {categoryData.categories.length === 0 ? (
-        <div className="text-center py-8 sm:py-12 text-gray-500">
+        <div className="text-center py-8 sm:py-12 text-gray-500 dark:text-gray-400">
           <p className="text-sm">No hay {selectedType === 'expense' ? 'gastos' : 'ingresos'} registrados en este mes</p>
         </div>
       ) : (
@@ -174,17 +174,17 @@ export default function CategoryReport({ transactions }: CategoryReportProps) {
                     {category.icon}
                   </div>
                   <div className="min-w-0">
-                    <h4 className="font-semibold text-sm sm:text-base text-gray-900 truncate">{category.name}</h4>
-                    <p className="text-xs sm:text-sm text-gray-500">
+                    <h4 className="font-semibold text-sm sm:text-base text-gray-900 dark:text-white truncate">{category.name}</h4>
+                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                       {category.count} {category.count === 1 ? 'transacción' : 'transacciones'}
                     </p>
                   </div>
                 </div>
                 <div className="text-right flex-shrink-0 ml-2">
-                  <p className="text-base sm:text-xl font-bold text-gray-900">
+                  <p className="text-base sm:text-xl font-bold text-gray-900 dark:text-white">
                     Q{category.amount.toFixed(2)}
                   </p>
-                  <p className="text-xs sm:text-sm text-gray-500">
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                     {category.percentage.toFixed(1)}%
                   </p>
                 </div>
@@ -192,7 +192,7 @@ export default function CategoryReport({ transactions }: CategoryReportProps) {
 
               {/* Progress Bar */}
               <div className="mb-3">
-                <div className="w-full bg-gray-100 rounded-full h-2">
+                <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
                   <div
                     className="h-2 rounded-full transition-all"
                     style={{
@@ -205,13 +205,13 @@ export default function CategoryReport({ transactions }: CategoryReportProps) {
 
               {/* Stats */}
               <div className="grid grid-cols-2 gap-2 sm:gap-3 text-sm">
-                <div className="bg-gray-50 rounded p-2">
-                  <p className="text-gray-600 text-xs mb-1">Promedio por transacción</p>
-                  <p className="font-semibold text-xs sm:text-sm text-gray-900">Q{category.average.toFixed(2)}</p>
+                <div className="bg-gray-50 dark:bg-gray-700 rounded p-2">
+                  <p className="text-gray-600 dark:text-gray-400 text-xs mb-1">Promedio por transacción</p>
+                  <p className="font-semibold text-xs sm:text-sm text-gray-900 dark:text-white">Q{category.average.toFixed(2)}</p>
                 </div>
-                <div className="bg-gray-50 rounded p-2">
-                  <p className="text-gray-600 text-xs mb-1">Total del mes</p>
-                  <p className="font-semibold text-xs sm:text-sm text-gray-900">Q{category.amount.toFixed(2)}</p>
+                <div className="bg-gray-50 dark:bg-gray-700 rounded p-2">
+                  <p className="text-gray-600 dark:text-gray-400 text-xs mb-1">Total del mes</p>
+                  <p className="font-semibold text-xs sm:text-sm text-gray-900 dark:text-white">Q{category.amount.toFixed(2)}</p>
                 </div>
               </div>
             </div>

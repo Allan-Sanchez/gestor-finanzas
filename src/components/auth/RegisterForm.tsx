@@ -53,7 +53,7 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
     return (
       <div className="text-center space-y-4">
         <div className="text-green-600 text-5xl mb-4">✓</div>
-        <h2 className="text-2xl font-bold text-gray-900">¡Registro Exitoso!</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">¡Registro Exitoso!</h2>
         <p className="text-gray-600">
           Revisa tu correo electrónico para confirmar tu cuenta y luego podrás iniciar sesión.
         </p>
@@ -67,7 +67,7 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">Crear Cuenta</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Crear Cuenta</h2>
         <p className="text-gray-600 mt-2">Comienza a gestionar tus finanzas hoy</p>
       </div>
 

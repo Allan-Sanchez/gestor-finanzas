@@ -118,10 +118,10 @@ export default function AccountBalanceReport({ accounts, transactions }: Account
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Reporte de Cuentas</h3>
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">Reporte de Cuentas</h3>
         <Wallet className="w-5 h-5 text-gray-400" />
       </div>
 
@@ -129,10 +129,10 @@ export default function AccountBalanceReport({ accounts, transactions }: Account
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 mb-6">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm font-medium text-gray-600 mb-1">Balance Total</p>
-            <p className="text-3xl font-bold text-gray-900">Q{totals.totalBalance.toFixed(2)}</p>
+            <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Balance Total</p>
+            <p className="text-3xl font-bold text-gray-900 dark:text-white">Q{totals.totalBalance.toFixed(2)}</p>
             <div className="flex items-center gap-2 mt-2">
-              <span className="text-sm text-gray-600">Balance inicial: Q{totals.totalInitial.toFixed(2)}</span>
+              <span className="text-sm text-gray-600 dark:text-gray-400">Balance inicial: Q{totals.totalInitial.toFixed(2)}</span>
             </div>
           </div>
           <div className="text-right">
@@ -144,7 +144,7 @@ export default function AccountBalanceReport({ accounts, transactions }: Account
                 {totals.totalChange >= 0 ? '+' : ''}Q{totals.totalChange.toFixed(2)}
               </span>
             </div>
-            <p className="text-sm text-gray-600 mt-1">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
               {totals.totalChangePercentage >= 0 ? '+' : ''}{totals.totalChangePercentage.toFixed(1)}%
             </p>
           </div>
@@ -153,7 +153,7 @@ export default function AccountBalanceReport({ accounts, transactions }: Account
 
       {/* Accounts List */}
       {accountStats.length === 0 ? (
-        <div className="text-center py-12 text-gray-500">
+        <div className="text-center py-12 text-gray-500 dark:text-gray-400">
           <p>No hay cuentas registradas</p>
         </div>
       ) : (
@@ -172,14 +172,14 @@ export default function AccountBalanceReport({ accounts, transactions }: Account
                       <Icon className="w-6 h-6" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-900">{account.name}</h4>
+                      <h4 className="font-semibold text-gray-900 dark:text-white">{account.name}</h4>
                       <span className={`text-xs px-2 py-0.5 rounded-full ${getAccountTypeColor(account.type)}`}>
                         {getAccountTypeName(account.type)}
                       </span>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-2xl font-bold text-gray-900 dark:text-white">
                       Q{account.current_balance.toFixed(2)}
                     </p>
                     <div className={`text-sm font-medium ${
@@ -193,9 +193,9 @@ export default function AccountBalanceReport({ accounts, transactions }: Account
 
                 {/* Account Stats Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  <div className="bg-gray-50 rounded p-3">
-                    <p className="text-xs text-gray-600 mb-1">Balance Inicial</p>
-                    <p className="text-sm font-semibold text-gray-900">
+                  <div className="bg-gray-50 dark:bg-gray-700 rounded p-3">
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Balance Inicial</p>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white">
                       Q{account.initial_balance.toFixed(2)}
                     </p>
                   </div>
@@ -221,16 +221,16 @@ export default function AccountBalanceReport({ accounts, transactions }: Account
 
                 {/* Last 30 days activity */}
                 <div className="mt-3 pt-3 border-t">
-                  <p className="text-xs text-gray-600 mb-2">Últimos 30 días</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">Últimos 30 días</p>
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-1">
-                      <span className="text-xs text-gray-600">Ingresos:</span>
+                      <span className="text-xs text-gray-600 dark:text-gray-400">Ingresos:</span>
                       <span className="text-sm font-semibold text-green-600">
                         Q{account.recentIncome.toFixed(2)}
                       </span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <span className="text-xs text-gray-600">Gastos:</span>
+                      <span className="text-xs text-gray-600 dark:text-gray-400">Gastos:</span>
                       <span className="text-sm font-semibold text-red-600">
                         Q{account.recentExpense.toFixed(2)}
                       </span>

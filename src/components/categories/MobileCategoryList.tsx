@@ -42,7 +42,7 @@ export default function MobileCategoryList({ categories, onEdit, onDelete }: Mob
               {category.icon || '📁'}
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-gray-900 truncate">{category.name}</h3>
+              <h3 className="font-semibold text-gray-900 dark:text-white truncate">{category.name}</h3>
               <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${categoryTypeColors[category.type]}`}>
                 {categoryTypeLabels[category.type]}
               </span>
@@ -53,8 +53,8 @@ export default function MobileCategoryList({ categories, onEdit, onDelete }: Mob
           {category.monthly_budget !== null && category.monthly_budget > 0 && (
             <div className="mb-3 pb-3 border-b border-gray-200">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Presupuesto mensual</span>
-                <span className="text-base font-semibold text-gray-900">
+                <span className="text-sm text-gray-600 dark:text-gray-400">Presupuesto mensual</span>
+                <span className="text-base font-semibold text-gray-900 dark:text-white">
                   {formatCurrency(category.monthly_budget)}
                 </span>
               </div>

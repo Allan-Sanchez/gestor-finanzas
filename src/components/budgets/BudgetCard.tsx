@@ -47,7 +47,7 @@ export default function BudgetCard({ budget, spent, onEdit, onDelete }: BudgetCa
 
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
@@ -58,8 +58,8 @@ export default function BudgetCard({ budget, spent, onEdit, onDelete }: BudgetCa
             {budget.categories.icon}
           </div>
           <div>
-            <h3 className="font-semibold text-gray-900">{budget.categories.name}</h3>
-            <p className="text-sm text-gray-500">
+            <h3 className="font-semibold text-gray-900 dark:text-white">{budget.categories.name}</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               {new Date(budget.month).toLocaleDateString('es-GT', {
                 month: 'long',
                 year: 'numeric'
@@ -72,7 +72,7 @@ export default function BudgetCard({ budget, spent, onEdit, onDelete }: BudgetCa
         <div className="relative">
           <button
             onClick={() => setShowMenu(!showMenu)}
-            className="p-1 hover:bg-gray-100 rounded"
+            className="p-1 hover:bg-gray-100 dark:bg-gray-700 rounded"
           >
             <MoreVertical className="w-5 h-5 text-gray-400" />
           </button>
@@ -83,13 +83,13 @@ export default function BudgetCard({ budget, spent, onEdit, onDelete }: BudgetCa
                 className="fixed inset-0 z-10"
                 onClick={() => setShowMenu(false)}
               />
-              <div className="absolute right-0 mt-2 w-48 max-w-[calc(100vw-2rem)] bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-20">
+              <div className="absolute right-0 mt-2 w-48 max-w-[calc(100vw-2rem)] bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-20">
                 <button
                   onClick={() => {
                     onEdit(budget);
                     setShowMenu(false);
                   }}
-                  className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:bg-gray-700 flex items-center gap-2"
                 >
                   <Edit className="w-4 h-4" />
                   Editar
@@ -113,10 +113,10 @@ export default function BudgetCard({ budget, spent, onEdit, onDelete }: BudgetCa
       {/* Progress Bar */}
       <div className="mb-4">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-gray-700">
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
             Q{spent.toFixed(2)} / Q{budget.amount.toFixed(2)}
           </span>
-          <span className="text-sm font-medium text-gray-700">
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
             {Math.min(percentage, 100).toFixed(1)}%
           </span>
         </div>
@@ -132,12 +132,12 @@ export default function BudgetCard({ budget, spent, onEdit, onDelete }: BudgetCa
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           {getStatusIcon()}
-          <span className="text-sm font-medium text-gray-700">
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
             {getStatusText()}
           </span>
         </div>
         <div className="text-right">
-          <p className="text-sm text-gray-500">Restante</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Restante</p>
           <p className={`text-lg font-semibold ${isOverBudget ? 'text-red-600' : 'text-green-600'}`}>
             Q{remaining.toFixed(2)}
           </p>

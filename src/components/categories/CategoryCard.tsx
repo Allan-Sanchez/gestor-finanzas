@@ -40,7 +40,7 @@ export default function CategoryCard({ category, onEdit, onDelete }: CategoryCar
             </div>
 
             <div className="flex-1">
-              <h3 className="font-semibold text-lg text-gray-900">{category.name}</h3>
+              <h3 className="font-semibold text-lg text-gray-900 dark:text-white">{category.name}</h3>
               <Badge variant="secondary" className={categoryTypeColors[category.type]}>
                 {categoryTypeLabels[category.type]}
               </Badge>
@@ -53,7 +53,7 @@ export default function CategoryCard({ category, onEdit, onDelete }: CategoryCar
               onClick={() => setShowMenu(!showMenu)}
               className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
             >
-              <MoreVertical className="w-5 h-5 text-gray-600" />
+              <MoreVertical className="w-5 h-5 text-gray-600 dark:text-gray-400" />
             </button>
 
             {showMenu && (
@@ -68,7 +68,7 @@ export default function CategoryCard({ category, onEdit, onDelete }: CategoryCar
                       onEdit(category);
                       setShowMenu(false);
                     }}
-                    className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                    className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 flex items-center gap-2"
                   >
                     <Edit2 className="w-4 h-4" />
                     Editar
@@ -93,8 +93,8 @@ export default function CategoryCard({ category, onEdit, onDelete }: CategoryCar
         {category.monthly_budget !== null && category.monthly_budget > 0 && (
           <div className="mt-4 pt-4 border-t border-gray-200">
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">Presupuesto mensual</span>
-              <span className="text-lg font-semibold text-gray-900">
+              <span className="text-sm text-gray-600 dark:text-gray-400">Presupuesto mensual</span>
+              <span className="text-lg font-semibold text-gray-900 dark:text-white">
                 {formatCurrency(category.monthly_budget)}
               </span>
             </div>

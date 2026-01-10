@@ -89,7 +89,7 @@ export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: Bud
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 pb-28 md:pb-4 z-50 overflow-y-auto">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-full sm:max-w-md my-8">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-full sm:max-w-md my-8">
         {/* Header */}
         <div className="flex items-center justify-between p-4 sm:p-6 border-b">
           <h2 className="text-lg sm:text-xl font-semibold">
@@ -97,7 +97,7 @@ export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: Bud
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600"
+            className="text-gray-400 hover:text-gray-600 dark:text-gray-400"
             disabled={isLoading}
           >
             <X className="w-6 h-6" />
@@ -108,7 +108,7 @@ export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: Bud
         <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 max-h-[calc(100vh-12rem)] md:max-h-[calc(100vh-8rem)] overflow-y-auto overflow-x-hidden">
           {/* Category */}
           <div className="min-w-0">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Categoría *
             </label>
             <select
@@ -138,7 +138,7 @@ export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: Bud
 
           {/* Month */}
           <div className="min-w-0">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Mes *
             </label>
             <input
@@ -157,11 +157,11 @@ export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: Bud
 
           {/* Amount */}
           <div className="min-w-0">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Monto Presupuestado *
             </label>
             <div className="relative min-w-0">
-              <span className="absolute left-3 top-2 text-gray-500">Q</span>
+              <span className="absolute left-3 top-2 text-gray-500 dark:text-gray-400">Q</span>
               <input
                 type="number"
                 step="0.01"
@@ -181,7 +181,7 @@ export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: Bud
 
           {/* Alert Percentage */}
           <div className="min-w-0">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Alerta al alcanzar (%)
             </label>
             <input
@@ -200,7 +200,7 @@ export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: Bud
             {errors.alert_percentage && (
               <p className="mt-1 text-sm text-red-600">{errors.alert_percentage}</p>
             )}
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
               Recibirás una alerta visual cuando gastes este porcentaje del presupuesto
             </p>
           </div>
@@ -210,7 +210,7 @@ export default function BudgetForm({ budget, onSubmit, onClose, isLoading }: Bud
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+              className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:bg-gray-700"
               disabled={isLoading}
             >
               Cancelar

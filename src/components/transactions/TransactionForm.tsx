@@ -156,7 +156,7 @@ export default function TransactionForm({
       <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="date" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Fecha *
               </label>
               <Input
@@ -169,7 +169,7 @@ export default function TransactionForm({
             </div>
 
             <div>
-              <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="type" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Tipo *
               </label>
               <Select
@@ -188,7 +188,7 @@ export default function TransactionForm({
           </div>
 
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Descripción *
             </label>
             <Input
@@ -203,7 +203,7 @@ export default function TransactionForm({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="account_id" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="account_id" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Cuenta *
               </label>
               <Select
@@ -220,7 +220,7 @@ export default function TransactionForm({
 
             {formData.type !== 'transfer' && (
               <div>
-                <label htmlFor="category_id" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="category_id" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Categoría *
                 </label>
                 <Select
@@ -242,7 +242,7 @@ export default function TransactionForm({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="amount" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Monto *
               </label>
               <Input
@@ -257,7 +257,7 @@ export default function TransactionForm({
             </div>
 
             <div>
-              <label htmlFor="status" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="status" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Estado *
               </label>
               <Select
@@ -275,7 +275,7 @@ export default function TransactionForm({
           </div>
 
           <div>
-            <label htmlFor="payment_method" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="payment_method" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Método de pago (opcional)
             </label>
             <Input
@@ -288,7 +288,7 @@ export default function TransactionForm({
           </div>
 
           <div>
-            <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="notes" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Notas (opcional)
             </label>
             <textarea
